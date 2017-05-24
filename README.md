@@ -1,4 +1,4 @@
-# Wechat mini-program documentation
+# WeChat mini-program documentation
 
 ## Summary
 
