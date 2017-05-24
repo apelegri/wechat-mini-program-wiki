@@ -1,4 +1,48 @@
-# Wechat mini-program documentation 
+# Wechat mini-program documentation
+
+## Summary
+
+- [Registration process](#registration-process)
+- [WeChat IDE](#wechat-ide)
+- [Dig into the "quickstart" project](#dig-into-the-quickstart-project)
+  - [Root directory](#root-directory)
+  - [Quickstart project pages](#quickstart-project-pages)
+  - [Take-away from the "quickstart" project](#take-away-from-the-quickstart-project)
+- [The life cycle of your MP](#the-life-cycle-of-your-mp)
+    - [Application life cycle](#application-life-cycle)
+    - [Page life cycle](#page-life-cycle)
+    - [App life cycle affects page life cycle](#app-life-cycle-affects-page-life-cycle)
+-[Core setup of your MP](#core-setup-of-your-mp)
+    - [Routing](#routing)
+    - [TabBar](#tabbar)
+    - [Window](#window)
+    - [Network timeout](#network-timeout)
+-[Create dynamic pages](#create-dynamic-pages)
+    - [WXML / HTML, what's the deal?](#wxml-/-html-whats-the-deal)
+    - [List rendering, wx:for](#list-rendering-wxfor)
+    - [ Conditional rendering, wx:if ; wx:elif ; wx:else](#conditional-rendering-wxif-wxelif-wxelse)
+    - [Template](#template)
+    - [Events](#events)
+    - [Mini-program sharing](#mini-program-sharing)
+-[WeChat design guidelines](#Wechat-design-guidelines)
+    - [WXSS](#wxss)
+    - [Style import](#style-import)
+- [Built-in components](#built-in-components)
+    - [Navigator](#navigator)
+    - [Scroll view](#scroll-view)
+    - [Picker](#picker)
+    - [Switch](#switch)
+    - [Toast](#toast)
+-[Leancloud DB](#leancloud-db)
+    - [Install and initialize](#install-and-initialize)
+    - [Persist data](#persist-data)
+    - [Leancloud dashboard](#leancloud-dashboard)
+    - [Module](#module)
+-[WeChat API](#wechat-api)
+    - [Get user information](#get-user-information)
+    - [Open the QR code scanner](#open-the-qr-code-scanner)
+    - [Location-base services](#location-base-services)
+    - [Image upload](#image-upload)
 
 ## Registration process
 The registration process is really tough and even more if you don’t have any experience with the pleasure of Chinese administrative world. 
@@ -274,8 +318,8 @@ App({
   },
   globalData: 'I am global data'
 })
+```
 
-```  
 **Comments:**   
 A user opens the mini-program which trigger **onLaunch** function and initialize the MP. When the initialization is completed, the **onShow** function is triggered which call the background process **onHide** and render a mini-program view.
 The MP enters the background from the foreground by triggering **onHide** function.  Then display a page from the background to the foreground, by calling **onShow**.    
@@ -304,7 +348,7 @@ The first time the page displays, the **onUnload** function is fired and the vie
  
  `Code snippet  of  "Page()" life cycle functions.`
  
- ```javascript
+```javascript
 Page({
   data: {
     text: "This is page data."
@@ -334,7 +378,7 @@ Page({
     hi: 'Hello world'
   }
 })
- ```
+```
  
 ### App life cycle affects page life cycle
 
@@ -769,7 +813,8 @@ WeChat framework provides to developers a large set of basic components, the [ex
 
  ![navigator attributes description](assets/navigator-table.png)  
  
-`Code snippet  "navigator" example. ` 
+`Code snippet  "navigator" example. `
+` 
  
 ```html
 <!-- .wxml -->
@@ -796,6 +841,7 @@ Scroll view can  be divided into horizontal and vertical scrolling.
 
 `Code snippet  "vertical scroll view" example.`
 
+
 ```html
 <!-- .wxml -->
 <scroll-view scroll-y="true" style="height: 200px;" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
@@ -804,7 +850,8 @@ Scroll view can  be divided into horizontal and vertical scrolling.
   <view id="yellow" class="scroll-view-item bc_yellow"></view>
   <view id="blue" class="scroll-view-item bc_blue"></view>
 </scroll-view>
-```  
+```
+
  
 ```javascript
 // .js
@@ -823,7 +870,8 @@ Page({
     console.log(e)
   }
 }) 
-```  
+```
+
 
 ### Picker  
 
@@ -1005,7 +1053,8 @@ class Form extends AV.Object {
 AV.Object.register(Form, 'Form');
 // Export object
 module.exports = Form;
-```  
+```
+
  
 ### Leancloud dashboard
 Next step is to **create your table** in Leancloud dashboard. Then create your class such as `Form` in this case and **add table columns**.
@@ -1017,7 +1066,7 @@ In this use case we have just seen **how to send data** we collect to Leancloud 
 ### Module
 A `module` is a variable that represent the current module. When creating a module, in Javascript is interpreted as **moving all related functions** into a file. `exports` is an object that will be **exposed as a module.** So whatever you assign to a `module.exports`, it will be exposed as a module.  
 
-## API 
+## WeChat API 
 ### Get user information
 WeChat "quickstart" project gives you a `getUserInfo` function in the **app.js** file. As the name suggests, this function is meant to obtain user information. Let’s go through this function step by step.
   
