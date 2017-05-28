@@ -18,16 +18,17 @@
     - [Window](#window)
     - [Network timeout](#network-timeout)
 - [Create dynamic pages](#create-dynamic-pages)
-    - [WXML / HTML, what's the deal?](#wxml-/-html-whats-the-deal)
-    - [List rendering, wx:for](#list-rendering-wxfor)
-    - [ Conditional rendering, wx:if ; wx:elif ; wx:else](#conditional-rendering-wxif-wxelif-wxelse)
+    - [WXML - HTML, what's the deal?](#wxml---html-whats-the-deal)
+    - [Data binding](#data-binding)
+    - [List rendering: wx:for](#list-rendering-wxfor)
+    - [Conditional rendering: wx:if, wx:elif, wx:else](#conditional-rendering-wxif-wxelif-wxelse)
     - [Template](#template)
     - [Events](#events)
     - [Mini-program sharing](#mini-program-sharing)
-- [WeChat design guidelines](#Wechat-design-guidelines)
+- [WeChat design guidelines](#wechat-design-guidelines)
     - [WXSS](#wxss)
     - [Style import](#style-import)
-- [Built-in components](#built-in-components)
+- [Built-in components](#builtin-components)
     - [Navigator](#navigator)
     - [Scroll view](#scroll-view)
     - [Picker](#picker)
@@ -40,8 +41,9 @@
     - [Module](#module)
 - [WeChat API](#wechat-api)
     - [Get user information](#get-user-information)
+    - [Data cache](#data-cache)
     - [Open the QR code scanner](#open-the-qr-code-scanner)
-    - [Location-base services](#location-base-services)
+    - [Location-base services](#locationbase-services)
     - [Image upload](#image-upload)
 
 ## Registration process
@@ -121,15 +123,15 @@ By clicking on the **preview option** you will be able to test the mini-program 
 ![project information](assets/project-information.png) 
 
 ## Dig into the "quickstart" project
-This section will drag you along the structure of the quickstart project  ([quickstart.zip](images/quickstart.zip)) provided by WeChat and the fundamentals you need to comply with this environment.  
-
+This section will drag you along the structure of the quickstart project  ([quickstart.zip](assets/quickstart.zip)) provided by WeChat and the fundamentals you need to comply with this environment.  
+[a relative link](other_file.md)
 The main page of this quickstart project displays a welcome page with the current user porfile's information. A click on your avatar will redirect to a new page displaying your current mini-program logs.
 
 ### Root directory
 Wechat mini-programs start with **‘app’** files to describe the overall program and your pages. These following files are placed in the root directory of the project and so are the entrance of your mini-program. Here is the official [WeChat documentation](https://mp.weixin.qq.com/debug/wxadoc/dev/framework/structure.html ).
 
 ![root directory](assets/root-directory.png)
-**app.js** is the script code, the global logic of your mini-program. You can setup and manipulate the life cycle functions of your MP, declare global variables or call the API.
+**app.js** is the script code, the global logic of your mini-program. You can setup and manipulate the [life cycle functions](#application-life-cycle) of your MP, declare global variables or call the API.
 
 `Code snippet of the "app.js" file.` 
 
@@ -221,7 +223,7 @@ Page({
   onLoad: function () {
     console.log('onLoad')
     var that = this
-    // Call to the application instance to get data 
+    // Call the application instance to get data 
     app.getUserInfo(function(userInfo){
       // Update data
       that.setData({
@@ -300,7 +302,7 @@ We can break-down a mini-program life cycle in two cycles, the application cycle
 
 ![App life cycle](assets/app-lifecycle.png)  
    
-`Code snippet of the "Ap()" life cycle functions.`
+`Code snippet of the "App()" life cycle functions.`
 
 ```javascript
 App({
@@ -808,13 +810,8 @@ WeChat framework provides to developers a large set of basic components, the [ex
 ### Navigator 
 `<navigator>` is your anchor in html. It is used to link from  one page to another. The most important attribute of the navigator element is `open-type`.
 
-
- **Navigator attributes description:**  
-
- ![navigator attributes description](assets/navigator-table.png)  
  
 `Code snippet  "navigator" example. `
-` 
  
 ```html
 <!-- .wxml -->
@@ -824,6 +821,12 @@ WeChat framework provides to developers a large set of basic components, the [ex
   <navigator url="/pages/index/index" open-type="switchTab" hover-class="other-navigator-hover">tab switching</navigator>
 </view>
 ```   
+
+
+ **Navigator attributes description:**  
+
+ ![navigator attributes description](assets/navigator-table.png)  
+
      
  **Open type values description:**  
  
@@ -832,12 +835,6 @@ WeChat framework provides to developers a large set of basic components, the [ex
 ### Scroll view 
 Scroll views has one main purpose, it lets users drag the area of the content they want to display. Mostly used to scroll content that will not fit entirely on the screen.
 Scroll view can  be divided into horizontal and vertical scrolling.  
-
-**Scroll view attributes description:**  
-
- ![navigator attributes description](assets/scroll-view-table.png)  
- 
-**Note:** whenever using vertical scroll, you must set the height in WXSS otherwise scroll will not take effect.
 
 `Code snippet  "vertical scroll view" example.`
 
@@ -851,7 +848,7 @@ Scroll view can  be divided into horizontal and vertical scrolling.
   <view id="blue" class="scroll-view-item bc_blue"></view>
 </scroll-view>
 ```
-
+**Note:** whenever using vertical scroll, you must set the height in WXSS otherwise scroll will not take effect.
  
 ```javascript
 // .js
@@ -872,15 +869,17 @@ Page({
 }) 
 ```
 
+**Scroll view attributes description:**  
+
+ ![navigator attributes description](assets/scroll-view-table.png)  
+ 
 
 ### Picker  
 
 Picker component in WeChat documentation is divided in three selectors, classic selector which is the default one, time selector and date selector. The use case below is based on the date picker but the logic remains the same for another picker.
 
-**Date selector attributes:**   
+  ![open type value description](assets/date-picker.png)  
 
- ![date picker description](assets/date-picker-table.png)  
- 
 `Code snippet "date picker" example.`
   
 ```html
@@ -904,14 +903,16 @@ Page({
 })   
 ```
 
+**Date selector attributes:**   
+
+ ![date picker description](assets/date-picker-table.png)  
+ 
+
 ### Switch
 A switch is a visual toggle with two states, on and off.  
 
  ![switch image](assets/switch-img.png)  
-   
- **Switch attributes:**  
- 
- ![switch table](assets/switch-table.png)   
+    
 
 `Code snippet "switch" example.` 
   
@@ -935,18 +936,30 @@ Page({
 })
 ```
 
+ **Switch attributes:**  
+ 
+ ![switch table](assets/switch-table.png)  
+
 ### Toast  
 A toast is a non-modal element used to display brief and auto-expiring components to **inform users.**
 
  ![switch image](assets/toast-img.png) 
  
- `Code snippet "toast" example.`
+ `Code snippet "spinner btn and toast" example.`
    
 ```html
 <!-- .wxml -->
 <button type="primary" form-type="submit" loading="{{loading}}">Send</button>
 ```   
+In the code snippet above we created a **dynamic button** with a **purpose of  submitting a form**. The button is animated 
+by a [loading spinner](https://weui.io/#loadmore) when you click on it. 
+
+ ![switch image](assets/btn-spinner.png)
+ 
+Then we display a toast  by using `wx.showToast` API  to inform users. 
+
 ```javascript
+// .js
 Page({
   data:{
     loading: false
@@ -962,14 +975,20 @@ Page({
     duration: 1500
  })
 }) 
-``` 
+```  
+ 
+
+
+
+
 
 ## Leancloud DB
-If you want to collect user inputs and persist data then a tool like Leancloud is appropriate.  Appropriate because it persists the data and provides a dashboard to readily access the data collected to reuse it on purpose.
 
-In this case we want to collect user inputs  through a form which makes sense that we need to setup Leancloud. 
+To give you some context, this Leancloud tutorial is based on a mini-program that has been developed in a purpose of gathering feedback through a form. Here is the [Github reposistory](https://github.com/apelegri/wagonform-wechat-mp) of this mini-program.
 
-Unless you have specific debugging needs,  if you are in development white list your domain name by checking up the last checkbox of your project tab in WeChat IDE. 
+If you want to collect and persist data in your MP, a tool like Leancloud is simple and makes the job done. It is  a good fit because it provides a dashboard to readily access the data collected and reuse it on purpose.
+
+Unless you have specific debugging needs,  if you are in development white list your domain name by checking up the last checkbox of your project tab in [WeChat IDE](#wechat-ide).
 For specific debugging needs you can follow this [leancloud tutorial](https://leancloud.cn/docs/weapp-domains.html).
 
 To begin with Leancloud setup, [sign up](https://leancloud.cn/dashboard/login.html#/signup) .   
@@ -1042,7 +1061,7 @@ We created an intermediate step, to assign user input we collect to variables. T
 **Persist data to Leancloud:** [Leancloud data storage guide](https://leancloud.cn/docs/leanstorage_guide-js.html)   
 In the function `bindformSubmit` we create a new `Form `object and `save` data. We also call `setACL(acl)` property on the object which is a **Leancloud built-in property.**
 
-Now that we have saved data we would like to  send it to Leancloud through the use of module (see below). 
+Now that we have saved data we would like to  send it to Leancloud through the use of [module](#module). 
 
 ```javascript 
 //model/form.js
@@ -1123,6 +1142,7 @@ Page({
 ```
 
 In the **index.js** the `onLoad` function call  `getUserInfo`  function **on the app instance** and **define a function as a parameter**. Here, they update `userInfo` to current user information. And pass `userInfo`updated from the **index.js** to `globalData`  in the **app.js** file. 
+
 **Debrief:**  
 If `userInfo` is null `getUserInfo` function returns the `else` statement which call the login interface. After that the current user successfully log in, `getUserInfo` is called and act as the `if` block we saw above. 
 
@@ -1156,7 +1176,7 @@ wx.setStorage ({key: 'name', data: 'Thibault'});
 - The asynchronous method, used `wx.setStorageSync` syntax,  which get the data through the incoming callback function.
  
  ```javascript
-wx.setStorageSync ('name', 'thibault');
+wx.setStorageSync ('name', 'Thibault');
 ```
 
  `wx.setStorageSync` syntax is simpler,  parameters are directly passed into `wx.setStorageSync`. 
@@ -1242,7 +1262,7 @@ The API provides services like `wx.openLocation`  to display locations on their 
 
 ```html
 <!-- .wxml --> 
-<button id="0" type="primary" bindtap="listenerBtnGetLocation">Get location</button>
+<button type="primary" bindtap="listenerBtnGetLocation">Get location</button>
 ```   
 
 ```javascript
