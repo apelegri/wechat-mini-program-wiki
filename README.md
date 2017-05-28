@@ -124,7 +124,7 @@ By clicking on the **preview option** you will be able to test the mini-program 
 
 ## Dig into the "quickstart" project
 This section will drag you along the structure of the quickstart project  ([quickstart.zip](assets/quickstart.zip)) provided by WeChat and the fundamentals you need to comply with this environment.  
-[a relative link](other_file.md)
+
 The main page of this quickstart project displays a welcome page with the current user porfile's information. A click on your avatar will redirect to a new page displaying your current mini-program logs.
 
 ### Root directory
@@ -539,7 +539,7 @@ Here is the link to [WeChat documentation](https://mp.weixin.qq.com/debug/wxadoc
 
 ## Create dynamic pages
   
-### WXML / HTML, what's the deal?
+### WXML - HTML, what's the deal?
 WXML is a set of WeChat language similar to HTML which combined a **library of components** and **an event system** for the purpose of building dynamic pages. WeChat event system behaves like classical Javascript events which **handle logical responses to the view layer.**  
  
  The table below lists the **significant  differences** you faced in development between **WXML / HTML:**  
@@ -581,7 +581,7 @@ Data binding uses [Mustache syntax](https://mustache.github.io/mustache.5.html) 
 
 WeChat offers lot of possibilities regarding [data binding usage](https://mp.weixin.qq.com/debug/wxadoc/dev/framework/view/wxml/data.html ). You have hands on component attributes, properties, strings operations, arithmetic operations, data path and array.
 
-### List rendering, wx:for
+### List rendering: wx:for
 `wx:for`control property is used in the view layer to bind an array, loop and assigned data to each item of the array.  
 
  `Code snippet "wx:for" example.`
@@ -609,7 +609,7 @@ Similar to `view wx:for` you can use `block wx:for` to render a block containing
 For more details about list rendering refer to [WeChat documentation ](https://mp.weixin.qq.com/debug/wxadoc/dev/framework/view/wxml/list.html ).
 
 
-### Conditional rendering, wx:if ; wx:elif ; wx:else 
+### Conditional rendering: wx:if, wx:elif, wx:else 
 
 Similar to **wx:for**, `wx:if` is used to define a condition statement and determines if the block should be rendered or not.  
   
