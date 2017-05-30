@@ -28,17 +28,21 @@
 - [WeChat design guidelines](#wechat-design-guidelines)
     - [WXSS](#wxss)
     - [Style import](#style-import)
-- [Built-in components](#builtin-components)
+- [Built-in components](#built-in-components)
     - [Navigator](#navigator)
     - [Scroll view](#scroll-view)
     - [Picker](#picker)
     - [Switch](#switch)
     - [Toast](#toast)
 - [Leancloud DB](#leancloud-db)
-    - [Install and initialize](#install-and-initialize)
-    - [Persist data](#persist-data)
+    - [Create a form](#create-a-form) 
+    - [Install and initialize Leancloud](#install-and-initialize-leancloud)
+    - [Create an object and encapsulate data](#create-an-object-and-encapsulate-data)
+    - [Persist objects on Leancloud](#persist-objects-on-leancloud) 
     - [Leancloud dashboard](#leancloud-dashboard)
     - [Module](#module)
+    - [Fetch data stored on Leancloud](#fetch-data-stored-on-leancloud)
+    - [Recommendations:](#recommendations)
 - [WeChat API](#wechat-api)
     - [Get user information](#get-user-information)
     - [Data cache](#data-cache)
@@ -103,7 +107,8 @@ A complete list of call to actions, buttons to perform tasks when you are in dev
 This tool is an important part of the IDE, it is slightly different from the classical Chrome DevTools.
 ![IDE debugger](assets/debugger.png)
 
- **1. Top bar**      
+ **1. Top bar** 
+      
  **Network:** This panel is to debug request and socket issues or page load performance.  
 **Storage:** Is the access to the data you have in your cache.  
 **AppData:** is used to display the current project data. You can directly edit the data in the panel and preview it.   
@@ -977,75 +982,146 @@ Page({
 }) 
 ```  
  
-
-
-
-
-
 ## Leancloud DB
 
-To give you some context, this Leancloud tutorial is based on a mini-program that has been developed in a purpose of gathering feedback through a form. Here is the [Github reposistory](https://github.com/apelegri/wagonform-wechat-mp) of this mini-program.
+This tutorial aims to explain the different **setps you have to follow** if you want to **persist data and fetch data stored**  in a database for your mini-program.
 
-If you want to collect and persist data in your MP, a tool like Leancloud is simple and makes the job done. It is  a good fit because it provides a dashboard to readily access the data collected and reuse it on purpose.
+**Let me give you some context first:**  
+The use case below is based on a mini-program that has been developed in a purpose of gathering feedback through a form and persist the data collected  on Leancloud. To make this tutorial more coherent, we decided to add a section on how to fetch and display data stored on Leancloud. To illustrate this second section we created a new page that display all reviews gathered by the form and stored on Leancloud.
 
-Unless you have specific debugging needs,  if you are in development white list your domain name by checking up the last checkbox of your project tab in [WeChat IDE](#wechat-ide).
-For specific debugging needs you can follow this [leancloud tutorial](https://leancloud.cn/docs/weapp-domains.html).
+Here is the [Github repository](https://github.com/apelegri/wagonform-wechat-mp) of the project used to create this tutorial. 
 
-To begin with Leancloud setup, [sign up](https://leancloud.cn/dashboard/login.html#/signup) .   
-Here is the link to [Leancloud documentation](https://leancloud.cn/docs/weapp.html). 
 
-### Install and initialize
+**Specs:**
+  
+1. [Create a form](#create-a-form).
+2. [Setup Leancloud](#install-and-initialize-leancloud) in your mini-program.
+3. [Create an object and encapsulate data](#create-an-object-and-encapsulate-data) you want to persist.
+4. [Persist objects on Leancloud](#persist-objects-on-leancloud).
+5. Create your table within [Leancloud dashboard](#leancloud-dashboard).
+6. Create a new review page and a button to redirect users to this review page.
+7. [Fetch data](#fetch-data-stored-on-leancloud) from Leancloud and display reviews.
 
-Installation and intinitialization is a two-step process: **follow** [Leancloud documenation](https://leancloud.cn/docs/weapp.html#存储).
+### Create a form
+
+`Code snippet "create a form" example.`
+
+```html 
+<!-- pages/form/form.wxml -->
+<form bindsubmit="bindFormSubmit">
+ <view class="header-form">
+  <view class="h2-form">About the workshop</view>
+ </view>
+ <view class="user-input">
+  <view class="input-label">Generally how was this workshop?</view>
+  <text class="label-details">Hints: takeaway, speed, time, location, people...</text>
+  <view class="text-area-wrp">
+   <textarea class="input-height" name="review" maxlength="-1" />
+  </view>
+  <!-- Refer to the Github repository above if you want the complete form -->
+  <button type="primary" form-type="submit">Send</button>
+ </form>
+</view>
+```
+When the **structure of the form** is created as above, next we need to **create the event**  which is trigerred by the form submission.
+
+```javascript
+//pages/form/from.js
+Page({
+  data:{
+    loading: false,
+  },
+  // Form Submission
+  bindFormSubmit: function(e) {
+    // Local storage
+    var review = e.detail.value.review
+    var recommendation = e.detail.value.recommendation
+    var learntocode = e.detail.value.learntocode
+    var hearAbout = e.detail.value.hearAbout
+    var nickName = e.detail.value.nickName
+    var email = e.detail.value.email
+    var phone = e.detail.value.phone  
+  } 
+})
+```
+
+**Local storage:**   
+In the `bindFormSubmit` function, we assigned user's inputs to local variables in the purpose of testing if we can collect user inputs locally from the form.  
+
+### Install and initialize Leancloud
+
+Before we begin the installation, if you are in development  white list your domain name by checking up the last checkbox of the project interface within your [WeChat IDE](#wechat-ide)  . For specific debugging needs you can follow this [Leancloud tutorial](https://leancloud.cn/docs/weapp-domains.html).
+
+To get started with Leancloud setup you need to [create an account](https://leancloud.cn/dashboard/login.html#/signup) on Leancloud.   
+
+Now that you are ready for the installation and initialization of Leancloud in your mini-program you can follow their [documentation](https://leancloud.cn/docs/weapp.html#存储) that will let you go through a **two-step process:** 
  
--  Install **av-weapp-min.js**  in your  **util.js** file.
--  Initialize the app by adding Leancloud `appId` and `appKey` in your **app.js**
+-  The installation of the **av-weapp-min.js**  in your  **util.js** file. 
+-  The initialization of  the app by adding Leancloud `appId` and `appKey` in your **app.js**.
 
-### Persist data
+```javascript
+// app.js
+// Require Leancloud library (the av-weapp-min.js file you just add).
+const AV = require('./utils/av-weapp-min.js');
 
-To organise your code, create a new folder called **model** and create a **.js** file in it. Named your file in accordance with the kind of object you want to persist, in this case a **form.**  
+// Initialization of the app
+AV.init({ 
+ appId: 't6hUVJfOwjHuWXuD9OE06rxxxxxxxxxxxx', 
+ appKey: 'HndT17mJ7wAIxsv8uxxxxxxxxxx', 
+});
+```
 
-First of all, in your **.js** file, require **av-weapp-min.js**  you install in **util.js** and assign it to an **AV constant**. 
-Then create an object to encapsulate data you want to send to this object.  
+If you are lost refer to the [Github repository](https://github.com/apelegri/wagonform-wechat-mp) of the project. 
+
+### Create an object and encapsulate data 
+
+In the first place, create a new folder called **model** and **add** a `form.js` file to this folder. Named your file in accordance with the kind of object you want to persist, in this case a **form.** This step is not required but permits to keep your **files organised.** 
+
+**Let's create the object:**  
+In the **form.js** file you just create, require **av-weapp-min.js**  you installed in **util.js** and assigns it to an `AV` constant. Then instantiate the`From`object. 
  
- `Code snippet "require and create object" example.`  
+ `Code snippet "require Leancloud and create object" example.`  
 
 ```javascript 
-//model/form.js
+// model/form.js
 const AV = require('../utils/av-weapp-min.js');
 class Form extends AV.Object {
 }
 ``` 
 
+Now that you have instantiated the `Form` object, you have to **create a new  form object** to **encapsulate data** in this object and redirect user after the form submission.
+
 `Code snippet "bindFormSubmit function" example.` 
 
 ```javascript  
- //pages/form/form.js
- bindFormSubmit: function(e) {
-    // Local storage
-    console.log(e)
-    var review = e.detail.value.review
-    var recommendation = e.detail.value.recommendation
-    var learntocode = e.detail.value.learntocode
-    var heardAbout = e.detail.value.heardAbout
-    var nickName = e.detail.value.nickName
-    var email = e.detail.value.email
-    var phone = e.detail.value.phone
-    // Leancloud permissions
-    var acl = new AV.ACL();
-    acl.setPublicReadAccess(true);
-    acl.setPublicWriteAccess(true);
-    // Leancloud storage
-    setTimeout(function(){
-    new Form({
-          name: nickName,
-          email: email,
-          phone: phone,
-          review: review,
-          recommendation: recommendation,
-          learn_to_code: learntocode,
-          heard_about: heardAbout
-        }).setACL(acl).save().catch(console.error);
+// pages/form/form.js
+bindFormSubmit: function(e) {
+   // Local storage
+   console.log(e)
+   var review = e.detail.value.review
+   var recommendation = e.detail.value.recommendation
+   var learntocode = e.detail.value.learntocode
+   var heardAbout = e.detail.value.heardAbout
+   var nickName = e.detail.value.nickName
+   var email = e.detail.value.email
+   var phone = e.detail.value.phone
+   
+   // Leancloud permissions
+   var acl = new AV.ACL();
+   acl.setPublicReadAccess(true);
+   acl.setPublicWriteAccess(true);
+  
+   // Leancloud storage
+   setTimeout(function(){
+     new Form({
+       name: nickName,
+       email: email,
+       phone: phone,
+       review: review,
+       recommendation: recommendation,
+       learn_to_code: learntocode,
+       heard_about: heardAbout
+     }).setACL(acl).save().catch(console.error);
     
     // Redirect user
     wx.reLaunch({
@@ -1055,35 +1131,115 @@ class Form extends AV.Object {
   }
 })
 ```
-**Local storage:**  
-We created an intermediate step, to assign user input we collect to variables. The purpose of this is first to test locally if we catch user inputs and then to make data collected in the `Form` object more readable.  
+**Code snippet debrief:**  
+Inside the `binFormSubmit` function we added **permissions** to allow Leancloud to **read and write through the object** we created and want to persist.  
+Then we defined a function `setTimeout` that **encapsulate data** in the  new `Form`object and **redirect user** when the form is submitted. 
 
-**Persist data to Leancloud:** [Leancloud data storage guide](https://leancloud.cn/docs/leanstorage_guide-js.html)   
-In the function `bindformSubmit` we create a new `Form `object and `save` data. We also call `setACL(acl)` property on the object which is a **Leancloud built-in property.**
+**Note:**`setACL(acl)` is a Leancloud built-in property.
 
-Now that we have saved data we would like to  send it to Leancloud through the use of [module](#module). 
+### Persist objects on Leancloud
+
+Now that we have encapsulated data in the object, we have to **persist the object on Leancloud** through the use of a [module](#module). 
+
+`Code snippet "persist the object on Leancloud" example.` 
 
 ```javascript 
-//model/form.js
+// model/form.js
 const AV = require('../utils/av-weapp-min.js');
 class Form extends AV.Object {
 }
-// Register data 
+
+// Register object
 AV.Object.register(Form, 'Form');
+
 // Export object
 module.exports = Form;
 ```
-
  
 ### Leancloud dashboard
-Next step is to **create your table** in Leancloud dashboard. Then create your class such as `Form` in this case and **add table columns**.
-And test it through your mini-program, to be sure that your data is persisted within Leancloud.
-**Recommendation:**  
-Read [Leancloud documentation](https://leancloud.cn/docs/leanstorage_guide-js.html#获取对象 ) or check their mini-program [github repository](https://github.com/leancloud/leantodo-weapp ), and dig in facilities Leancloud offers.   
-In this use case we have just seen **how to send data** we collect to Leancloud but you can **get object, update object, delete object** and so on.
+So far everything is done within your mini-program, what remains to be done is **to project**  the data collected in your object **within your Leancloud dashboard**.
+
+- **Create a project** in your Leancloud dashboard.
+- **Create a table** in this project by adding the class object you created, such as a `Form` class in this exemple.  
+- **Add columns** to your table (be cautionous on the data type you specify when you add your columns). 
+
+**Test it** to be sure that the data collected, is persisted within your Leancloud dashboard.
 
 ### Module
-A `module` is a variable that represent the current module. When creating a module, in Javascript is interpreted as **moving all related functions** into a file. `exports` is an object that will be **exposed as a module.** So whatever you assign to a `module.exports`, it will be exposed as a module.  
+A `module` is a variable that represents the current module. In Javascript a module is interpreted as **moving all related functions** into a file. `exports` is an object that will be **exposed as a module.** So whatever you assign to a `module.exports`, it will be exposed as a module.  
+
+### Fetch data stored on Leancloud
+
+First let me remind you the background of this section. We want to **display in a new page the list of reviews** we have **collected and persisted on Leancloud** through the form we have created above. I assume that you have followed the first section of the tutorial, [(if you missed it see above)](#leancloud-db).
+
+**Sepcs:**
+
+- Create a new page called `review`.
+- Fetch data from Leancloud and display all reviews stored. 
+
+
+Above all we have to create a new page **review** (**tip:** just add a new route to your **app.json**, the framework will create the new page folder and files by itself). 
+ 
+After the page creation let's create a **button** on the **index page** that **redirect to** the **review page**. 
+
+```html
+<!-- index.html -->
+<!-- CTA redirect to review page -->
+<view class="cta-margin">
+ <navigator url="/pages/review/review" class="btn-index">Reviews</navigator>
+</view>
+```
+
+Now that we have created the new review page and a button to visit this page, we need to **fetch data stored on Leancloud and displays it**.
+
+`Code snippet "fetch data stored on Leancloud and displays it" example.`
+
+```html
+<!-- review.wxml --> 
+<block wx:for="{{forms}}" wx:for-item="form" wx:key="objectId">
+ <text data-id="{{form.objectId}}" >
+  {{form.review}}
+ </text>
+ <text> 
+  - {{form.name}}
+ </text>
+</block>
+``` 
+Above we created a **list rendering block** using `wx:for` that display each review and name of the person who creates the review.
+
+```javascript
+// pages/review/review.js
+// Require leancloud and object 
+const AV = require('../../utils/av-weapp-min.js');
+const Form = require('../../model/form.js');
+
+// Fetch data from Leancloud
+Page({
+  data: {
+    forms: []
+  },
+  onReady: function() {
+    new AV.Query('Form')
+      .descending('createdAt')
+      .find()
+      .then(forms => this.setData({ forms }))
+      .catch(console.error);
+  }, 
+})
+```
+
+**Code snippet debrief:**    
+ We created a **query** on the`AV` object which contains the data that fetch each form stored on Leancloud. Then we **sort out** each form according to its creation date to finish by setting up the `forms` array. And display data in the view using the Mustache syntax.
+
+
+### Recommendations:
+In this use case we have just seen **how to store data** we collect to Leancloud and **how to fetch data stored** in Leancloud for display. 
+
+I recommend that you read [Leancloud documentation](https://leancloud.cn/docs/leanstorage_guide-js.html#获取对象 ) or check the LeanTodo mini-program they pushed on their [Github repository](https://github.com/leancloud/leantodo-weapp)  and dig in facilities Leancloud offers.  
+
+
+
+
 
 ## WeChat API 
 ### Get user information
@@ -1117,6 +1273,7 @@ App({
   globalData:{
     userInfo:null
   }
+})
 ```  
 
 For the moment let's focus on the the first `if` block of `getUserInfo` function.  The if condition statement aims to determine if **cb argument** passed to get `getUserInfo` is a function type and if `userInfo` is not null.
