@@ -54,10 +54,12 @@
 The registration process is really tough and even more if you don’t have any experience with the pleasure of Chinese administrative world. 
 WeChat verification process will be recurrent all along your path to register, keep calm.
 
-From the registration of a Wechat mini-program to the development release you need to go through these two steps: 
+From the registration of a Wechat mini-program to the development release you need to go through these steps: 
 
-* **Pick the right type of application** and go through the registration process. 
-* Completion of mini-program **certification**, which is  a pre-requisisite to improve MP technical data sheet.
+- [Create an account](https://mp.weixin.qq.com) on WeChat.
+- **Pick the right type of application** and go through the registration process.
+- Completion of **mini-program certification**.
+- Fill in mini-program information.
 
 Here is a list of materials you will need to register for a mini-program as a company:
 
@@ -65,7 +67,7 @@ Here is a list of materials you will need to register for a mini-program as a co
 * Chinese ID.
 * Phone number, to certify your identity during verification process.
 * Chinese business license, to register as an enterprise or individual vendor.
-* Company documents: organisation code and certificate, enterprise bank account.
+* Company documents: organisation code, certificate and enterprise bank account.
 * Fill in the official request letter they provide, signed it (by the administrator) and stamped it with the enterprise stamp to send it back.
 
 Follow this complete manual on how to register and create a mini-program project, [Medium article](https://medium.com/@yelin.qiu/a-complete-manual-on-wechat-mini-program-development-8fd28a85ee0d) 
@@ -239,7 +241,7 @@ Page({
 })
 ```
 **Comments:**   
-They create a variable of the **_app instance_**, to collect user information later on. Next they **_register the page_** and set `data:` to bind data into the view. They create a function called `Tapped` to redirect the current user to his logs page when the event is triggered.   The last  function will be executed during the index page **_loading time_** and lastly call the app instance to **_get user information_** and update `userInfo`.
+They create a variable of the **app instance**, to collect user information later on. Next they **register the page** and set `data:` to bind data into the view. They create a function called `Tapped` to redirect the current user to his logs page when the event is triggered.   The last  function will be executed during the index page **loading time** and lastly call the app instance to **get user information** and update `userInfo`.
 
   
 `Code snippet of the "logs.js" file.`
@@ -263,7 +265,7 @@ Page({
 
 
 **Comments:**  
-First of all in **log.js** they **_require_** **util.js** and assign it to a variable. Then they register the page, set data and create **onLoad** function to **_retrieve current user logs_**  from the cache and render it in `formatTime` which is provided by the require of **util.js**
+First of all in **log.js** they **require** **util.js** and assign it to a variable. Then they register the page, set data and create **onLoad** function to **retrieve current user logs**  from the cache and render it in `formatTime` which is provided by the require of **util.js**
 
  `Code snippet of the "utils.js" file.`
  
@@ -290,14 +292,15 @@ module.exports = {
   formatTime: formatTime
 }
 ```
-**Note:** The Utils folder is used to **_import libraries_** and require them when you need it. In the context of WeChat quickstart project **util.js** file create a formatTime function to display the date of your logs properly.  You may recall the require of **util.js** in **logs.js** file.
+**Note:** The Utils folder is used to **import libraries** and require them when you need it. In the context of WeChat quickstart project **util.js** file create a formatTime function to display the date of your logs properly.  You may recall the require of **util.js** in **logs.js** file.
 
 ### Take-away from the "quickstart" project
 Up to now you catch the fact that you will have **two layers in each page:**
 
 * **Logical layer (.js):** this layer process the data and send it to the view layer, while receiving events trigger from the view layer.
-* **View layer (.wxml/.wxss):** this layer display the data processed by the logical layer into a view, while sending the event of the view layer to the logical layer.
+* **View layer (.wxml/.wxss):** this layer display the data processed by the logical layer into a view, while sending the event of the view layer to the logical layer.  
 
+![App life cycle](assets/logical-view-layer-scheme.png) 
 
 ## The life cycle of your MP
 We can break-down a mini-program life cycle in two cycles, the application cycle and the page cycle. As a consequence the application  life cycle is affecting the page life cycle.
@@ -328,8 +331,7 @@ App({
 ```
 
 **Comments:**   
-A user opens the mini-program which trigger **onLaunch** function and initialize the MP. When the initialization is completed, the **onShow** function is triggered which call the background process **onHide** and render a mini-program view.
-The MP enters the background from the foreground by triggering **onHide** function.  Then display a page from the background to the foreground, by calling **onShow**.    
+A user opens the mini-program which trigger **onLaunch** function and initialize the MP. When the initialization is completed, the **onShow** function is triggered. The **onHide**  function is triggered when the current user quit the mini-program. 
 
 `Code snippet  "getApp()" function.`
 
@@ -349,7 +351,7 @@ console.log(appInstance.globalData) // I am global data
    
  **Comments:**  
 After page registration, the framework triggers the **onLoad** function that load the page and call the **onShow** function.     
-The first time the page displays, the **onUnload** function is fired and the view is rendered with **onReady** function.  The **onHide** function is triggered when the mini-program  runs in the background or jumps to another page. The **onShow** function is triggered when the MP has a background entry into the foreground or recover the page.
+The first time the page displays, the **onUnload** function is fired and the view is rendered with **onReady** function.  The **onHide** function is triggered when the mini-program jumps to another page. The **onShow** function is triggered when the MP has a background entry into the foreground or recover the page.
   
  By using the redirect method, `wx.redirectTo()` close the current page to return to the previous page with `wx.navigateBack()`, **onShow** function triggers **onUnload** function.
  
@@ -393,7 +395,6 @@ Page({
  
 When the initialization of the mini-program `App()` is complete, the page loads by calling **onLoad** for the first time, and will only call it once.   
  
-Once the mini-program is in the `App()` background, the  **onHide** function calls the **onHide** function of `Page()` and then switch to run background logic.
 When the MP is running from the background to the foreground, it first calls the `App()` **onShow** function and then calls the `Page()` **onShow** function when switching to the foreground.
 
 **WeChat recommendations:**  
@@ -757,27 +758,66 @@ Mostly used when you nest elements and don’t want to display the parent node o
 
 ### Mini-program sharing
 
-Here is a practical tip for your mini-program sharing. The  use of the `onShareAppMessage` function will **enable a  forwad button** when you click on the **top right corner menu.**
+Here are practical tips to leverage from mini-program sharing. 
+WeChat opens up two ways to share a mini-program:
 
-The `onShareAppMessage`  is a `Page()` function which implies that the **event handler** (forward button) will be **specific to the page where you declare the function.**  
+- First you can **enable the forward button** within the **drop-down menu** that appears by clicking on the **upper right corner** `...` of the page.  
 
-**Restriction:**  
-The only thing that you can define with`onShareAppMessage` function is the **event**, the forward button (event handler) will be **automatically created by the framework.**
+- Second you can **create a forward button within the page** of your mini-program, which makes the sharing process more user friendly.
 
- 
-`Code snippet  "MP sharing for that particular page" example. ` 
+In both variants, the framework will **automatically** forward a card with a **screen shot** of your MP header. 
+
+**1. Enable the forward button of the drop-down menu**.
+
+To enable this button we need to use  a `Page()`function called `onShareAppMessage`. 
+
+ `Code snippet  "Enable the forward button of the drop-down menu" example. ` 
  
 ```javascript
-// .js
+// index.js
+onShareAppMessage: function () {
+    return {
+      title: 'Le Wagon coding school',
+      path: 'pages/index/index'
+    }
+  },
+```
+In this function you have to **define a title** that will be displayed in the top of the forward card and the **current page path**. If you forget to add a title WeChat will add one by default (your mini-program name).
+
+**Restriction:**  
+The only thing that you can define in this case is the **event** `onShareAppMessage`. The forward button (event handler) will be **created by the framework** itself. 
+
+
+**2.  Create a forward button within the current page.**
+
+This recent feature allows developers to create a specific forward button within the page by using the button property `open-type` and its value `'share'`.  
+
+`Code snippet  "Create a forward button within the page" example. `
+  
+```html
+<!-- about.wxml -->
+<view bindtap="onShareAppMessage">
+ <button class="share-btn" open-type="share" type="primary">Share</button>
+</view>
+```
+
+Unlike the first case, we have to **create the event handler** that triggers the `onShareAppMessage` function. This function calls `wx.showShareMenu`and pass `withShareTicket` as a parameter.
+
+```javascript
+// about.js
 Page({
   onShareAppMessage: function () {
-    return {
-      title: 'Forward',
-      path: ''
-    }
+    console.log('share')
+    wx.showShareMenu({
+     withShareTicket: true
+    })
   }
-})  
+})
 ```
+
+**Note:** Both variants are using a `Page()` function which implies that you are sharing the specific page where you declare the function.
+
+
 
 ## WeChat design guidelines 
 WeChat aims to build a friendly, efficient and consistent user experience. To make it happen WeChat official design team provides a [WeUI repository](https://github.com/weui ). This **basic front-end library** enables developers to match the native visual experience.  
