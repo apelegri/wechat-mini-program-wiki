@@ -130,19 +130,25 @@ By clicking on the **preview option** you will be able to test the mini-program 
 ![project information](assets/project-information.png) 
 
 ## Dig into the "quickstart" project
-This section will drag you along the structure of the quickstart project  ([quickstart.zip](assets/quickstart.zip)) provided by WeChat and the fundamentals you need to comply with this environment.  
+This section will drag you along the structure of the **"quickstart" provided by WeChat** (their boilerplate) and the fundamentals you need to comply with this environment.   
+ 
+**Download WeChat** [quickstart.zip](assets/quickstart.zip). 
 
-The main page of this quickstart project displays a welcome page with the current user porfile's information. A click on your avatar will redirect to a new page displaying your current mini-program logs.
+The index page of this boilerplate displays a welcome page with the current user porfile's information. A click on your avatar will redirect to a new page displaying your current mini-program logs. 
 
 ### Root directory
-Wechat mini-programs start with **‘app’** files to describe the overall program and your pages. These following files are placed in the root directory of the project and so are the entrance of your mini-program. Here is the official [WeChat documentation](https://mp.weixin.qq.com/debug/wxadoc/dev/framework/structure.html ).
+
+
+Wechat mini-programs start with **"app" files** (see the screen shot below). These files are mini-program root directory and so the entrance of your mini-program.  
+Here is the official [WeChat documentation](https://mp.weixin.qq.com/debug/wxadoc/dev/framework/structure.html ). 
 
 ![root directory](assets/root-directory.png)
 **app.js** is the script code, the global logic of your mini-program. You can setup and manipulate the [life cycle functions](#application-life-cycle) of your MP, declare global variables or call the API.
 
-`Code snippet of the "app.js" file.` 
+**`Code snippet of the "app.js" file.`** 
 
 ```javascript
+// app.js
 App({
   onLaunch: function () {
   // API call to get data from the local cache
@@ -176,9 +182,9 @@ App({
 })
 ```
 
-**app.json** is the global, public configuration of the overall  mini-program. You can configure, MP page’s path, MP window, set the network timeout and debug configuration. 
+**app.json** is the global configuration of the overall mini-program. You can configure, MP (mini-program) page’s path, MP window, set the network timeout and debug configuration. 
 
-`Code snippet of the "app.json" file.` 
+**`Code snippet of the "app.json" file.`** 
 
 ```javascript
 {
@@ -196,23 +202,42 @@ App({
 ```
 **Note:** you cannot add any comment in the **app.json**.
 
-**app.wxss** is the global public style sheet of the applet. You should declare common style rules of your mini-program.
+**app.wxss** is the global style sheet of the mini-program. You should declare common style rules.
     
-### Quickstart project pages 
+### WeChat "quickstart" pages 
 
-**Pages folder**  
-In WeChat quickstart project there are two views, the index page which is the welcome page and the logs page which displays current user mini-program logs. 
 
-**Pages** folder is where you create your mini-program pages. Each page you create is required to contain two files **.js** for the logic of your interface and **.wxml** for the interface layout. You can add two more files in each page you create **.json** used for page configuration and **.wxss** for the style sheet of your interface.  
-**Rule:** each page of your mini-program can be composed of four different file extensions (js ; json ; wxml ; wxss)  but **should have the same name.**
+The **two pages** of WeChat quickstart are:
 
-A new page will contain at least **.js** and **.wxml** extensions. The **.json** file extension is used just in case you want to change the window in this particular page. And **.wxss** if you want to add a style sheet to your page.
+- **index page** which is the welcome page.  
+- **logs page** which displays current user mini-program logs. 
+
+
+
+**Pages** folder is where you have or create your mini-program pages. Each page you create is **required to contain two files:**
+ 
+ - **.js** file for the logic of your interface.
+ - **.wxml** file for the interface layout. 
+
+You can add two more files in each page you create:
+
+-  **.json** file for page configuration. 
+-  **.wxss** file for the style sheet of your interface.  
+  
+  
+**Rule:**   
+Each page of your mini-program can be composed of four different file extensions (js ; json ; wxml ; wxss)  but **should have the same name.**
+
+  
+**Further details:**  
+A new page will contain at a minimum a **.js** file and a **.wxml** file. The **.json** file extension is used just in case you want to change the [window configuration](#window) in this particular page. And **.wxss** if you want to add a style sheet to your page.
 
 Let's see what's happen in each page of the quickstart project.  
 
-`Code snippet of the "index.js" file.`
+**`Code snippet of the "index.js" file.`**
 
 ```javascript
+// index.js
 // Get application instance
 var app = getApp()
 Page({
@@ -220,7 +245,7 @@ Page({
     motto: 'Hello World',
     userInfo: {}
   },
-  // Event handler
+  // Event 
   Tapped: function() {
     console.log("tapped");
     wx.navigateTo({
@@ -240,13 +265,21 @@ Page({
   }
 })
 ```
-**Comments:**   
-They create a variable of the **app instance**, to collect user information later on. Next they **register the page** and set `data:` to bind data into the view. They create a function called `Tapped` to redirect the current user to his logs page when the event is triggered.   The last  function will be executed during the index page **loading time** and lastly call the app instance to **get user information** and update `userInfo`.
+
+**Snippet comments:**  
+   
+1. The snippet above assign the **app instance** to a variable. This app instance will be called in `Page()`function later on to collect user information. 
+2. Next it registers a `Page()` function and sets `data:` to dynamically bind data into the view.
+3. `Tapped`function redirects the current user to his logs page.
+4. `onLoad` function  gets user information and  updates `userinfo`data.
+
+
 
   
-`Code snippet of the "logs.js" file.`
+**`Code snippet of the "logs.js" file.`**
 
 ```javascript
+// logs.js
 var util = require('../../utils/util.js')
 Page({
   data: {
@@ -264,10 +297,15 @@ Page({
 ```
 
 
-**Comments:**  
-First of all in **log.js** they **require** **util.js** and assign it to a variable. Then they register the page, set data and create **onLoad** function to **retrieve current user logs**  from the cache and render it in `formatTime` which is provided by the require of **util.js**
+**Snippet comments:**  
 
- `Code snippet of the "utils.js" file.`
+1. First it requires **util.js** in the purpose of calling `formatTime` later on. 
+2. It registers `Page()` function and sets `data:`.
+3. `onLoad` function **retrieves current user logs**  from the cache `wx.getStorageSync('logs')`. Then render logs in `formatTime` which is provided by the require of **util.js**.
+
+
+
+**`Code snippet of the "utils.js" file.`**
  
 ```javascript
 function formatTime(date) {
@@ -292,25 +330,38 @@ module.exports = {
   formatTime: formatTime
 }
 ```
-**Note:** The Utils folder is used to **import libraries** and require them when you need it. In the context of WeChat quickstart project **util.js** file create a formatTime function to display the date of your logs properly.  You may recall the require of **util.js** in **logs.js** file.
+**Note:**  
+The Utils folder is used to **import libraries** and require them when you need it. In code snippets above **util.js** file create a `formatTime` function to display the date of your logs properly.  You may recall the require of **util.js** in **logs.js** file.
 
 ### Take-away from the "quickstart" project
 Up to now you catch the fact that you will have **two layers in each page:**
 
-* **Logical layer (.js):** this layer process the data and send it to the view layer, while receiving events trigger from the view layer.
-* **View layer (.wxml/.wxss):** this layer display the data processed by the logical layer into a view, while sending the event of the view layer to the logical layer.  
+- **Logical layer (.js):** process the data and send it to the view layer, while receiving events triggered from the view layer.
+
+- **View layer (.wxml/.wxss):** display the data processed by the logical layer into a view, while sending the events of the view layer to the logical layer.
 
 ![App life cycle](assets/logical-view-layer-scheme.png) 
 
 ## The life cycle of your MP
-We can break-down a mini-program life cycle in two cycles, the application cycle and the page cycle. As a consequence the application  life cycle is affecting the page life cycle.
+
+We can break-down a mini-program life cycle in two cycles, the application cycle and the page cycle. 
+The **`App()`** life cycle is the **start and end point** of the mini-program whereas **`Page()`** life cycle is activated when user browses through the mini-program.
+
 ### Application life cycle 
 
 `App()`function is used to register a mini-program. It accepts an object as a parameter which specifies life cycle functions of a MP.    
 
 ![App life cycle](assets/app-lifecycle.png)  
+
+**Comments:**   
+
+1. A user opens the mini-program which trigger **`onLaunch`** function and initialize the MP. 
+2. When the initialization is completed, the **`onShow`** function is triggered. 
+3. The **`onHide`** function is triggered when the current user quit the mini-program.   
+
+
    
-`Code snippet of the "App()" life cycle functions.`
+**`Code snippet of the "App()" life cycle functions.`**
 
 ```javascript
 App({
@@ -330,17 +381,16 @@ App({
 })
 ```
 
-**Comments:**   
-A user opens the mini-program which trigger **onLaunch** function and initialize the MP. When the initialization is completed, the **onShow** function is triggered. The **onHide**  function is triggered when the current user quit the mini-program. 
 
-`Code snippet  "getApp()" function.`
+
+**`Code snippet  "getApp()" function.`**
 
 ```javascript
 // .js
 var appInstance = getApp()
 console.log(appInstance.globalData) // I am global data
-```  
- 
+``` 
+
 `getApp()` function, can be useful  for the simple reason that you can’t define the `App()` function  inside of a `Page()` function. In order to access the app instance you must call `getApp()` function.
 
 ### Page life cycle
@@ -350,11 +400,15 @@ console.log(appInstance.globalData) // I am global data
  ![Page life cycle ](assets/page-lifecycle.png)  
    
  **Comments:**  
-After page registration, the framework triggers the **onLoad** function that load the page and call the **onShow** function.     
-The first time the page displays, the **onUnload** function is fired and the view is rendered with **onReady** function.  The **onHide** function is triggered when the mini-program jumps to another page. The **onShow** function is triggered when the MP has a background entry into the foreground or recover the page.
-  
- By using the redirect method, `wx.redirectTo()` close the current page to return to the previous page with `wx.navigateBack()`, **onShow** function triggers **onUnload** function.
- 
+
+1. After page registration, the framework call the **`onLoad`** function.
+2. When page load, it calls the **`onShow`** function.
+3. The first time the page displays, **`onShow`** function calls **`onReady`** to render the view.
+4. When it is not the first time the page displays, **`onShow`** function directly  displays.
+5. The **`onHide`** id triggered when the mini-program jump to another page. 
+6. **`onUnload`** function is called when you quit a page by using `wx.redirectTo()`and  `wx.navigateBack()`. Or when the current page is relaunched, `wx.reLaunch`.
+
+
  `Code snippet  of  "Page()" life cycle functions.`
  
 ```javascript
@@ -393,9 +447,9 @@ Page({
 
  ![App affects page ](assets/app-affect-page.png)  
  
-When the initialization of the mini-program `App()` is complete, the page loads by calling **onLoad** for the first time, and will only call it once.   
+When the **`App()`** life cycle  is complete, the page loads by calling **`onLoad`** for the first time, and will only call it once.   
  
-When the MP is running from the background to the foreground, it first calls the `App()` **onShow** function and then calls the `Page()` **onShow** function when switching to the foreground.
+When the mini-program is running from the background to the foreground, it first calls the `App()` **onShow** function and then calls the `Page()` **onShow** function when switching to the foreground.
 
 **WeChat recommendations:**  
   
@@ -555,7 +609,8 @@ WXML is a set of WeChat language similar to HTML which combined a **library of c
  **Note:** All components and attributes are lowercase.
   
 ### Data binding
-Mini-programs cannot use DOM directly to control WXML elements. So, when you need to update data in the view layer  you will use **data binding** and **element rendering methods.**  
+
+The MP framework does not let you use the DOM to control your WXML elements. Instead, you will **update your view layer** (.wxml file) **via a classic data binding method:**  
 
  ![wxml and html differences](assets/data-binding.png)  
  
@@ -588,7 +643,7 @@ Data binding uses [Mustache syntax](https://mustache.github.io/mustache.5.html) 
 WeChat offers lot of possibilities regarding [data binding usage](https://mp.weixin.qq.com/debug/wxadoc/dev/framework/view/wxml/data.html ). You have hands on component attributes, properties, strings operations, arithmetic operations, data path and array.
 
 ### List rendering: wx:for
-`wx:for`control property is used in the view layer to bind an array, loop and assigned data to each item of the array.  
+The `wx:for` control property binds an array from your logical layer (.js file), loop through it and assign the data. 
 
  `Code snippet "wx:for" example.`
    
@@ -610,6 +665,7 @@ Page({
   }
 })
 ```
+
 Similar to `view wx:for` you can use `block wx:for` to render a block containing **multiple lines.**
 
 For more details about list rendering refer to [WeChat documentation ](https://mp.weixin.qq.com/debug/wxadoc/dev/framework/view/wxml/list.html ).
@@ -1282,6 +1338,7 @@ I recommend that you read [Leancloud documentation](https://leancloud.cn/docs/le
 
 
 ## WeChat API 
+
 ### Get user information
 WeChat "quickstart" project gives you a `getUserInfo` function in the **app.js** file. As the name suggests, this function is meant to obtain user information. Let’s go through this function step by step.
   
