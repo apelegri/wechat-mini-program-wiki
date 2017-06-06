@@ -1,5 +1,4 @@
-# WeChat mini-program documentation
-
+# WeChat mini-program whitebook
 ## Summary
 
 - [Registration process](#registration-process)
@@ -53,7 +52,7 @@
     - [Get user information](#get-user-information)
     - [Data cache](#data-cache)
     - [Open the QR code scanner](#open-the-qr-code-scanner)
-    - [Location-base services](#locationbase-services)
+    - [Location-based services](#locationbase-services)
     - [Image upload](#image-upload)
 
 ## Registration process
@@ -731,7 +730,7 @@ WeChat offers lot of possibilities regarding [data binding usage](https://mp.wei
 ### List rendering: wx:for
 The `wx:for` control property binds an array from your logical layer (.js file), loop through it and assign the data. 
 
- `Code snippet "wx:for" example.`
+ **`Code snippet "wx:for" example.`**
    
 ```html
 <!-- .wxml -->
@@ -1529,7 +1528,7 @@ If current user is already log in, **user information are assigned to** `globalD
 Wechat mini-programs have a **mechanism of cache in their API.** In fact, each mini-program has its own **local cache storage.** 
 
 **Reminder:**  
-The **cache** on a page takes a small amount of **faster and limited  storage**. Cache storage is used to store data we want to access quickly later on. It **reduces user waiting time**, since the **request** is satisfied **from the cache** which is closer to clients compared to the original server used to request your DB.
+The **cache** on a page takes a small amount of **faster and limited  storage**. Cache storage is used to store data we want to access quickly. It **reduces user waiting time**, since the **request** is satisfied **from the cache** which is closer to clients compared to the original server used to request your DB.
 
 WeChat provides three main actions on the cache:
   
@@ -1627,7 +1626,7 @@ You can **call up** your **client code scanner UI** by using the `wx.scanCode` A
  }
 ```
 
-### Location-base services
+### Location-based services
 
 The API provides services like `wx.openLocation`  to display locations on their **built-in map view.** Actually there are two ways to display a location the `wx.chooseLocation`  to **choose the location you want to display** or the `wx.getLocation` **to get and display the location of your visitor.**
 
