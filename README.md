@@ -23,9 +23,12 @@
     - [List rendering: wx:for](#list-rendering-wxfor)
     - [Conditional rendering: wx:if, wx:elif, wx:else](#conditional-rendering-wxif-wxelif-wxelse)
     - [Template](#template)
+    	- [Import a template](#import-a-template)
+    	- [Define a template](#define-a-template)
     - [Events](#events)
     	- [Event handler:](#event-handler)
     	- [Event binding:](#event-binding)
+    	- [Event types classification](#event-types-classification)
     - [Mini-program sharing](#mini-program-sharing)
     	- [Enable the forward button of the drop-down menu](#enable-the-forward-button-of-the-drop-down-menu)
     	- [Create a forward button within the current page](#create-a-forward-button-within-the-current-page)
@@ -59,7 +62,7 @@
 The registration process is really tough and even more if you don’t have any experience with the pleasure of Chinese administrative world. 
 WeChat verification process will be recurrent all along your path to register, keep calm.
 
-From the registration of a Wechat mini-program to the development release you need to go through these steps: 
+From WeChat mini-program registrationto the development release you need to go through these steps: 
 
 - [Create an account](https://mp.weixin.qq.com) on WeChat.
 - **Pick the right type of application** and go through the registration process.
@@ -79,12 +82,17 @@ Follow this complete manual on how to register and create a mini-program project
 or [WeChat documentation](https://mp.weixin.qq.com/debug/wxadoc/introduction/index.html?t=201758) (Chinese).
 
 ## WeChat IDE
-[IDE](https://mp.weixin.qq.com/debug/wxadoc/introduction/index.html?t=201758) (integrated development environment)  is a software WeChat provides for developers which consists of a code editor, a compiler and a debugger accessible through a single graphical user interface. 
+
+**Definition:**  
+An [IDE](https://mp.weixin.qq.com/debug/wxadoc/introduction/index.html?t=201758) (integrated development environment)  is a set of programming tools for writing application which consists of a code editor, a compiler and a debugger accessible through a single graphical user interface. 
  
-Download WeChat **development tool:**  [Mac](https://servicewechat.com/wxa-dev-logic/download_redirect?type=darwin&from=mpwiki), [Windows 64](https://servicewechat.com/wxa-dev-logic/download_redirect?type=darwin&from=mpwiki), [Windows 32](https://servicewechat.com/wxa-dev-logic/download_redirect?type=ia32&from=mpwiki)
+Download WeChat IDE: 
+ [Mac](https://servicewechat.com/wxa-dev-logic/download_redirect?type=darwin&from=mpwiki), [Windows 64](https://servicewechat.com/wxa-dev-logic/download_redirect?type=darwin&from=mpwiki), [Windows 32](https://servicewechat.com/wxa-dev-logic/download_redirect?type=ia32&from=mpwiki)
+ 
 
-
-**The following is a quick tutorial to master WeChat  IDE**
+<div style="text-align:center">
+<strong>The following is a quick tutorial to master WeChat  IDE</strong>
+</div>
 
 A **Code editor** with the arboresence of your files on the side and a **Simulator** on the left which displays the preview of your interface.
 ![IDE Wechat home](assets/code-editor.png)
@@ -107,11 +115,11 @@ A complete list of call to actions, buttons to perform tasks when you are in dev
 **10. Devices:** It gives a list of devices to test mini-program responsivness.  
 **11.	 You can work on:** wifi, 4G, 3G, 2G.  
 **12. Hide arborescence**  
-**13. Manage your files:**  Search, add and delete a folder or files.
+**13. Manage your files:**  Search, add and delete a folder or a file.
 
 
 **Debugger / Inspector:**  
-This tool is an important part of the IDE, it is slightly different from the classical Chrome DevTools.
+This tool is an important part of the IDE, it looks like Chrome DevTools but it is slightly different. 
 ![IDE debugger](assets/debugger.png)
 
  **1. Top bar** 
@@ -120,24 +128,27 @@ This tool is an important part of the IDE, it is slightly different from the cla
 **Storage:** Is the access to the data you have in your cache.  
 **AppData:** is used to display the current project data. You can directly edit the data in the panel and preview it.   
 **Wxml:** let you inspect and edit on the fly every elements of your page.  
-**Sensor:** you can simulate location and the perfomance of the mobile device to debbug gravity sensing.  
+**Sensor:** you can simulate location and the perfomance of the mobile device to debug gravity sensing.  
   
  **2. Sources panel**   
 Sources panel display the current project script file.  
    
  **3. Console**  
- The console will let you know what errors you have in your code by logging diagnostic information and interact with javascript in the page as your console.log() you have placed and more. 
+ The console will let you know what errors you have in your code by logging diagnostic information and interact with javascript in the page as your **console.log()** you have placed and more. 
 
 
 **Project information:**  
-This page is the place where you will find the current project details as your AppID, directory information and more.  
-By clicking on the **preview option** you will be able to test the mini-program directly on your phone after scanning a QR code.
+This page is where you will find the current project details as your AppID, directory information and more.  By clicking on the **preview option** you will be able to test the mini-program directly on your phone after scanning a QR code.
+
+**Note:**
+When you test your mini-program on the phone you can enable the debugger tool directly on the phone.    
+
 ![project information](assets/project-information.png) 
 
 ## Dig into the "quickstart" project
 This section will drag you along the structure of the **"quickstart" provided by WeChat** (their boilerplate) and the fundamentals you need to comply with this environment.   
  
-**Download WeChat** [quickstart.zip](assets/quickstart.zip). 
+Download WeChat [quickstart.zip](assets/quickstart.zip). 
 
 **Quickstart arborescence:**
 
@@ -168,8 +179,7 @@ The index page of this boilerplate displays a welcome page with the current user
 ### Root directory
 
 
-Wechat mini-programs start with **"app" files** (see the screen shot below). These files are mini-program root directory and so the entrance of your mini-program.  
-Here is the official [WeChat documentation](https://mp.weixin.qq.com/debug/wxadoc/dev/framework/structure.html ). 
+Wechat mini-programs start with **"app" files** (see the screen shot below). These files are mini-program root directory and so the entrance of your mini-program.  (Here is the official [WeChat documentation](https://mp.weixin.qq.com/debug/wxadoc/dev/framework/structure.html )). 
 
 ![root directory](assets/root-directory.png)
 **app.js** is the script code, the global logic of your mini-program. You can setup and manipulate the [life cycle functions](#application-life-cycle) of your MP, declare global variables or call the API.
@@ -274,7 +284,7 @@ Page({
     motto: 'Hello World',
     userInfo: {}
   },
-  // Event 
+  // Event that redirect user to logs page
   Tapped: function() {
     console.log("tapped");
     wx.navigateTo({
@@ -286,7 +296,7 @@ Page({
     var that = this
     // Call the application instance to get data 
     app.getUserInfo(function(userInfo){
-      // Update data
+      // Updates userInfo data
       that.setData({
         userInfo:userInfo
       })
@@ -360,7 +370,7 @@ module.exports = {
 }
 ```
 **Note:**  
-The Utils folder is used to **import libraries** and require them when you need it. In code snippets above **util.js** file create a `formatTime` function to display the date of your logs properly.  You may recall the require of **util.js** in **logs.js** file.
+The Utils folder is used to **import libraries** and require them when you need it. In the code snippet above **util.js** file creates a `formatTime` function to display the date of your logs properly.  You may recall the require of **util.js** in **logs.js** file.
 
 ### Take-away from the "quickstart" project
 Up to now you catch the fact that you will have **two layers in each page:**
@@ -378,9 +388,9 @@ The **`App()`** life cycle is the **start and end point** of the mini-program wh
 
 ### Application life cycle 
 
-`App()`function is used to register a mini-program. It accepts an object as a parameter which specifies life cycle functions of a MP.    
+`App()` function is used to register a mini-program. It accepts an object as a parameter which specifies life cycle functions of a MP.    
 
-![App life cycle](assets/app-lifecycle.png)  
+![App life cycle](assets/app-lifecylce.png)  
 
 **Comments:**   
 
@@ -430,10 +440,10 @@ console.log(appInstance.globalData) // I am global data
    
  **Comments:**  
 
-1. After page registration, the framework call the **`onLoad`** function.
-2. When a page loads, it calls the **`onShow`** function.
-3. The first time the page displays, **`onShow`** function calls **`onReady`** to render the view.
-4. When it is not the first time the page displays, **`onShow`** function directly  render a view.
+1. After page registration, the framework calls the **`onLoad`** function.
+2. When a page load, it calls the **`onShow`** function.
+3. The first time the page is displayed, **`onShow`** function calls **`onReady`** to render the view.
+4. When it is not the first time, **`onShow`** function directly  render a view.
 5. The **`onHide`** is triggered when the mini-program jumps to another page. 
 6. **`onUnload`** function is called when you quit a page by using `wx.redirectTo()`and  `wx.navigateBack()`. Or when the current page is relaunched, `wx.reLaunch`.
 
@@ -474,7 +484,7 @@ Page({
  
 When the **`App()`** life cycle  is complete, the page loads by calling **`onLoad`** for the first time, and will only call it once.   
  
-When the mini-program is running from the app life cycle (background) to the page life cycle (foreground), it first calls the **`App()`** `onShow` function and then calls the **`Page()`** `onShow` function when switching to the foreground.
+When the mini-program is running from the background (app life cycle) to the foreground (page life cycle), it first calls the **`App()`** `onShow` function and then calls the **`Page()`** `onShow` function when switching to the foreground.
 
 **WeChat recommendations:**  
   
@@ -484,7 +494,7 @@ When the mini-program is running from the app life cycle (background) to the pag
  
 ## Core setup of your MP
 The setup of your mini-program is simple
-and designed  to save you time or being frustrated if you have customization needs. Below is the complete setup of your **app.json**.  
+and designed  to save you time or being frustrated if you have customization needs. Below is the complete setup of the **app.json** file.  
   
 WeChat divides the **app.json configuration** in five parts:  
  
@@ -554,14 +564,14 @@ In this part we will **break-down** this complete **app.json setup** exemple.
 Each time you **add a route path** to `"pages"`, the framework will **automatically create** the folder and files that corresponds to the path  you just created. 
 
 
-WeChat framework, brings in several **routing logics:**   
+**WeChat framework, brings in several routing logics:**   
 
  ![App affects page ](assets/routing-mode.png)   
  
 **Routing mode description:** 
 
 - **Initialization:** 
-Once the mini-program is launched, the first page loads and calls the `onLoad` and `onShow` function.
+Once the mini-program is launched, the first page load by calling the `onLoad` and`onShow` function.
 
 - **Open a new page:** 
 Opening a new page hides the current page and jumps to another one using the `wx.navigateTo`. 
@@ -579,10 +589,10 @@ Close all pages and reload the current page.
 
 - **Switch tabs,**  `wx.switchTab`: Jumps from one tabBar page to another one and close or hides all other non-tabBar pages by using **onUnload, onHide and onShow**, discover all possible [scenarios for tabs switching](https://mp.weixin.qq.com/debug/wxadoc/dev/framework/app-service/route.html).  
  
-**Switch tabs, navigation restrictions:**  
+ **Switch tabs, navigation restrictions:**  
 
-- No callback at the top of the page.  
-- The tabBar path cannot take parameters.
+ * No callback at the top of the page.  
+ * The tabBar path cannot take parameters.
  
 **WeChat recommendations:**  
  
@@ -592,13 +602,12 @@ Close all pages and reload the current page.
 -	 The tabBar at the bottom of the page is displayed **according to the page you are on.** As long as the page you are on is defined in the tabBar, the tabBar will be display.
 -    **Page stack modification** will lead to routing and page status error, it is not recommended. Dig further in [pages stack mecanism](https://mp.weixin.qq.com/debug/wxadoc/dev/framework/app-service/route.html).
 
-**`getCurrentPages()`**:
- 
-This function is used to **get the instance of the current page.** It is given as an array in the page stack order.The first item of the array is the first page and the last item the current page. 
+**`getCurrentPages()`**:  
+This function is used to **get the instance of the current page stack.** It is given as an array in the page stack order. The first item of the array is the first page and the last item the current page. 
 
 ### TabBar
-In case you need a tab bar top or bottom you can use the TabBar item. 
-**TabBar is an array** which can configure a minimum of 2 tabs and a **maximum of 5 tabs.**
+
+`tabBar`  item as a name suggets is to configure mini-program top or bottom tab bar.**`tabBar` is an array** which can configure a minimum of 2 tabs and a **maximum of 5 tabs.**
 
  **`Code snippet  of the "app.json" file.`**
   
@@ -631,7 +640,7 @@ In case you need a tab bar top or bottom you can use the TabBar item.
   
 Using the `tabBar` `list` key, requires an object in each element of the array.  
 
-**`List` attributes values** are as follow:  
+**`List` attributes values are as follow:**   
  
  ![tabBar attributes ](assets/tabbar-list-attributes.png)  
  
@@ -674,7 +683,7 @@ Here is the link to [WeChat documentation](https://mp.weixin.qq.com/debug/wxadoc
 
 ### Debug
 
-Link to [WeChat documentation](https://mp.weixin.qq.com/debug/wxadoc/dev/framework/config.html).
+Here is a Llnk to [WeChat documentation](https://mp.weixin.qq.com/debug/wxadoc/dev/framework/config.html).
 
 
 ## Create dynamic pages
@@ -697,8 +706,6 @@ Mini-program framework does not allow developers to use the DOM to control your 
 
  ![wxml and html differences](assets/data-binding.png)  
  
-
-
 In order to comply with WeChat requirements the `data` attribute has to be initialized **as a JSON format** within `Page()` function. **Data binding** technique allows to **update data dynamically** within the view.  
  
 A good practice is to initialize `data` at the top of the `Page()` function.  
@@ -751,14 +758,30 @@ Page({
 })
 ```
 
-Similar to `view wx:for` you can use `block wx:for` to render a block containing **multiple lines.** (See [`block`](#wxml---html-whats-the-deal) in the WXML table above).
+Similar to `view wx:for` you can use **`block wx:for`** to render a block containing **multiple lines.** (See [block](#wxml---html-whats-the-deal) in the WXML table above).
 
-For more details about list rendering refer to [WeChat documentation ](https://mp.weixin.qq.com/debug/wxadoc/dev/framework/view/wxml/list.html ).
+**`Code snippet "block wx:for" example.`**
+
+```html
+<!-- .wxml -->
+<block wx:for="{{array}}" wx:for-item="array-item" wx:key="key">
+  <view class="card">
+    <view class="card-description">
+  
+    </view>
+  </view>
+</block>
+```
+For more details on the code above see this [Github repository](https://github.com/apelegri/wagonform-wechat-mp/tree/master/pages/form). 
+
+**Further ressources:**
+
+- For more details about list rendering refer to [WeChat documentation ](https://mp.weixin.qq.com/debug/wxadoc/dev/framework/view/wxml/list.html ).
 
 
 ### Conditional rendering: wx:if, wx:elif, wx:else 
 
-Similar to **wx:for**, `wx:if` is used to define a condition statement and determines if the block should be rendered or not.  
+Similar to `wx:for`, **`wx:if`** is used to define a condition statement and determines if the block should be rendered or not.  
   
 **`Code snippet "wx:if" example.`**
  
@@ -778,18 +801,29 @@ Page({
   }
 })
 ```  
-If you want to display **more than one tag** within your **conditional statement block** you can use `block wx:if`.
+If you want to display **more than one tag** within your **conditional statement block** you can use **`block wx:if`**.
+
+```html
+<!-- .wxml -->
+<block wx:if="{{true}}">
+ <view> view1 </view>
+ <view> view2 </view>
+</block>
+```
+
 Dig further in `wx:if` [WeChat documentation](https://mp.weixin.qq.com/debug/wxadoc/dev/framework/view/wxml/conditional.html).
  
 ### Template
 
-Template allows to define code snippet that you want to reuse in different files of your mini-program when you need it.
+Template allows to define code snippet that you want to reuse multiple times in different files of your mini-program.
 
 WXML template item has its own scope and can only use data to pass in.
 
-**`Code snippet  "template" example. `**
-  
+#### Define a template 
+
  First, to declare a template you need to define the template name.
+
+**`Code snippet  "template" example. `**
  
 ```html
 <!-- .wxml -->
@@ -799,8 +833,12 @@ WXML template item has its own scope and can only use data to pass in.
     <text> Time: {{time}} </text>
   </view>
 </template> 
+
+<!-- Call the template -->
+<template is="msgItem" data="{{item}}"/>
 ```
-Then you have to pass the required data to the template.
+
+Later on if you want to call  a template within the same file use the **`is` attribute** and the **template name as a value** to declare the required template. And don't forget to pass data to the template using the `data` attribute.   
 
 ```javascript
 // .js
@@ -815,14 +853,29 @@ Page({
 })
 ```
 
+#### Import a template 
 
-Later on when you want to call  a template use the **`is` attribute** and the **template name as a value** to declare the required template. And don't forget to pass data to the template using the `data` attribute.   
-  
+Import the template that you have defined in a specific file to another file in the purpose of reusing it. 
+
+
+**`Code snippet "define a template in a specific file" exemple`**
+
 ```html
-<!-- .wxml -->
-<template is="msgItem" data="{{item}}"/>
+<!-- item.wxml -->
+<template name="item">
+  <text>{{text}}</text>
+</template>
 ```
- More details on WeChat documentation [here](https://mp.weixin.qq.com/debug/wxadoc/dev/framework/view/wxml/template.html).
+
+**`Code snippet "import and call the template in index.wxml" exemple`**
+
+```html
+<!-- index.wxml -->
+<import src="item.wxml"/>
+<template is="item" data="{{text: 'forbar'}}"/>
+```
+
+More details on WeChat documentation [here](https://mp.weixin.qq.com/debug/wxadoc/dev/framework/view/wxml/template.html).
 
 ### Events
 
@@ -832,7 +885,7 @@ In addition to data initialization and life cycle functions, the framework allow
 
 WXML element (event handler) triggers the event and the **logical layer binds the event handler** to receive an event object as a parameter.   
  
- `Code snippet "event handler" example.` 
+ **`Code snippet "event handler" example.`** 
  
 ```html
 <!-- .wxml -->
@@ -853,11 +906,10 @@ Page({
 })
 ```  
 
-For more **event types** refer to WeChat documentation, [event classification](https://mp.weixin.qq.com/debug/wxadoc/dev/framework/view/wxml/event.html ).  
-
 **`setData()` :**   
 This function **updates data** within the logical layer which next will be send to the view layer.
 `setData()` function receives an object as a parameter and updates the key value by using `this.data` as a **data path.**  
+
 
 #### Event binding:  
   
@@ -869,6 +921,27 @@ There are many kind of binding events, most components have their own definition
 - **`bindinput`** for an input.
 - **`bindscroll`**  for a scroll-view.
 
+**`Code snippet "form binding event" example.`**
+
+```html
+<!-- form.wxml -->
+<form bindsubmit="bindFormSubmit">
+  ...
+  <button type="primary" form-type="submit">Submit</button>
+ </form>
+```
+
+```javascript
+// form.js
+// Form submission function
+Page({
+ bindFormSubmit: function(e) {
+ ...
+ }
+})
+```
+
+
 **Classic binding events:**
 
 - **`bind+event_type`**
@@ -876,11 +949,12 @@ There are many kind of binding events, most components have their own definition
 
 
 The two common binding events used are `bind+event_type` and `catch+event_type`. The **catch event** is the one that prevent against bubbling events.  
-  
+ 
+**Bubbling event concept:**   
 For none javascript person, **bubbling event**, can be defined when an event occurs in **an element nested in another element.** Both elements the parent node and the nested element are **register as a handler** for that particluar event.
 To prevent **against  bubbling events**, the parent node of the nested element should use `catch+event_type`, it will **counteract the bubbling event effect.**
 
-**`Code snippet  "counteract bubbling effect" example.`**
+**`Code snippet  "counteract bubbling effect with catchtap" example.`**
  
 ```html
 <!-- .wxml -->
@@ -894,6 +968,7 @@ To prevent **against  bubbling events**, the parent node of the nested element s
   </view>
 </view>
 ```
+
 ```javascript
 // .js
 Page({
@@ -911,17 +986,43 @@ Page({
 
 Mostly used when you nest elements and don’t want to display the parent node of the element you bind.
 
+#### Event types classification
+
+ ![event types list](assets/event-types.png)  
+ 
+ **`Code snippet  "tap and longtap event binding" example.`**
+ 
+```html
+<!-- index.wxml -->
+<button bindtap="ontap" type="primary">Tap<button/>
+<button bindlongtap="onlongtap" type="primary">Long tap<button/>
+```
+
+```javascript
+// index.js
+Page({
+  ontap: function() {
+    console.log('tap');
+  },
+  onlongtap: function() {
+    console.log('longtap');
+  }
+})
+```
+
 
 ### Mini-program sharing
 
 Here are practical tips to leverage from mini-program sharing. 
 WeChat opens up two ways to share a mini-program:
 
-- First you can **enable the forward button** within the **drop-down menu** that appears by clicking on the **upper right corner** `...` of the page.  
+![forwarding opportunity](assets/forward-mp.png)  
 
-- Second you can **create a forward button within the page** of your mini-program, which makes the sharing process more user friendly.
+1. Possibility to **enable the forward button** within the **drop-down menu** that appears by clicking on the **upper right corner** `...` of the page.  
 
-In both variants, the framework will **automatically** forward a card with a **screen shot** of your MP header. 
+2. **Create a forward button within the page** of your mini-program, which makes the sharing process more user friendly.
+
+In both variants, the framework will **automatically** forward a mini-program card with a **screen shot** of your MP header. 
 
 #### Enable the forward button of the drop-down menu
 
@@ -938,15 +1039,15 @@ onShareAppMessage: function () {
     }
   },
 ```
-In this function you have to **define a title** that will be displayed in the top of the forward card and the **current page path**. If you forget to add a title WeChat will add one by default (your mini-program name).
+In this function you have to **define a title** that will be displayed on the top of the forward card and the **current page path**. If you forget to add a title WeChat will add one by default (your mini-program name).
 
 **Restriction:**  
-The only thing that you can define in this case is the **event** `onShareAppMessage`. The forward button (event handler) will be **created by the framework** itself. 
+The only thing that you can define in this case is the **event** `onShareAppMessage`. The forward button will be **created by the framework** itself. 
 
 
 ####  Create a forward button within the current page
 
-This recent feature allows developers to create a specific forward button within the page by using the button property `open-type` and its value `'share'`.  
+This feature allows developers to create a specific forward button within the page by using the button property `open-type` and its value `'share'`.  
 
 **`Code snippet  "Create a forward button within the page" example. `**
   
@@ -995,7 +1096,7 @@ WXSS is using `rpx` (responsive pixel) as unit. It allows to adjust pixels accor
 #### Style import
 To **import outbound** style sheet use `@import` statement followed by the **relative path** and a `;` at the end of the statement.
 
-`Code snippet  "@import" example. `  
+**`Code snippet  "@import" example. `**  
 
 ```css
 /* app.wxss*/ 
@@ -1046,9 +1147,12 @@ The use case below is based on the date picker but the logic remains the same fo
   
 ```html
 <!-- .wxml -->
-<picker mode="date" value="{{date}}" start="2017-05-18" end="2018-10-10" bindchange="datePicker">
-  <text>{{date}}</text>
+<picker mode="date" value="{{date}}" start="2015-09-01" end="2020-09-01" bindchange="bindDateChange">
+  <view class="picker">
+    Now the date is {{date}}
+ </view>
 </picker>
+
 ```  
   
 ```javascript
@@ -1057,12 +1161,12 @@ Page({
   data: {
     date: '2017-05-20'
   },
-  datePicker: function(e) {
-    this.setDate({
+  bindDateChange: function (e) {
+    this.setData({
       date: e.detail.value
     })
-  }
-})   
+  },
+})    
 ```
 
 **Date selector attributes:**   
@@ -1244,13 +1348,13 @@ Page({
 ```
 
 **Local storage:**   
-In the `bindFormSubmit` function, we assigned user's inputs to local variables in the purpose of testing if we can collect user inputs locally from the form.  
+In the `bindFormSubmit` function, we assigned user's inputs to local variables in the purpose of testing if we can collect form's user inputs locally.  
 
 ### Install and initialize Leancloud
 
 Before we begin the installation, if you are in development  white list your domain name by checking up the last checkbox of the project interface within your [WeChat IDE](#wechat-ide)  . For specific debugging needs you can follow this [Leancloud tutorial](https://leancloud.cn/docs/weapp-domains.html).
 
-To get started with Leancloud setup you need to [create an account](https://leancloud.cn/dashboard/login.html#/signup) on Leancloud.   
+To get started with Leancloud setup, first [create an account](https://leancloud.cn/dashboard/login.html#/signup) on Leancloud.   
 
 Now that you are ready for the installation and initialization of Leancloud in your mini-program you can follow their [documentation](https://leancloud.cn/docs/weapp.html#存储) that will let you go through a **two-step process:** 
  
@@ -1276,7 +1380,7 @@ If you are lost refer to the [Github repository](https://github.com/apelegri/wag
 In the first place, create a new folder called **model** and **add** a `form.js` file to this folder. Named your file in accordance with the kind of object you want to persist, in this case a **form.** This step is not required but permits to keep your **files organised.** 
 
 **Let's create the object:**  
-In the **form.js** file you just create, require **av-weapp-min.js**  you installed in **util.js** and assigns it to an `AV` constant. Then instantiate the`From`object. 
+In the **form.js** file you just created, require **av-weapp-min.js**  you installed in **util.js** and assigns it to an `AV` constant. Then instantiate the`From`object. 
  
  **`Code snippet "require Leancloud and create object" example.`**  
 
@@ -1287,7 +1391,7 @@ class Form extends AV.Object {
 }
 ``` 
 
-Now that you have instantiated the `Form` object, you have to **create a new  form object** to **encapsulate data** in this object and redirect user after the form submission.
+Now that you have instantiated the `Form` object, you have to **create a  form object** in the logical layer (here form.js) to **encapsulate data** in this object and redirect user after the form submission.
 
 **`Code snippet "bindFormSubmit function" example.`** 
 
@@ -1331,10 +1435,10 @@ bindFormSubmit: function(e) {
 ```
 **Code snippet debrief:**  
 
-1. Inside the `binFormSubmit` function we added **permissions** to allow Leancloud to **read and write through the object** we created and want to persist.  
+1. Inside the `binFormSubmit` function we added **permissions** that allow Leancloud to **read and write through the object** we created and want to persist.  
 2. We defined a function `setTimeout` that **encapsulate data** in the  new `Form`object and **redirect user** when the form is submitted. 
 
-**Note:**`setACL(acl)` is a Leancloud built-in property.
+**Note:**`setACL(acl)` is a Leancloud [built-in property](https://leancloud.cn/docs/leanstorage_guide-js.html#保存对象).
 
 ### Persist objects on Leancloud
 
@@ -1365,7 +1469,7 @@ So far everything is done within your mini-program, what remains to be done is *
 **Test it** to be sure that the data collected, is persisted within your Leancloud dashboard.
 
 ### Module
-A `module` is a variable that represents the current module. In Javascript a module is interpreted as **moving all related functions** into a file. `exports` is an object that will be **exposed as a module.** So whatever you assign to a `module.exports`, it will be exposed as a module.  
+In Javascript a [module](https://medium.freecodecamp.com/javascript-modules-a-beginner-s-guide-783f7d7a5fcc) refers to a small units of independent, reusable code. It is interpreted as **moving all related functions** into a file. `exports` is an object that will be **exposed as a module.** So whatever you assign to a `module.exports`, it will be exposed as a module.  In this case `module.exports` send the `Form` object  to Leancloud.
 
 ### Fetch data stored on Leancloud
 
@@ -1376,10 +1480,8 @@ First let me remind you the background of this section. We want to **display in 
 - Create a new page called `review`.
 - Fetch data from Leancloud and display all reviews stored. 
 
-
-Above all we have to create a new page **review** (**tip:** just add a new route to your **app.json**, the framework will create the new page folder and files by itself). 
- 
-After the page creation let's create a **button** on the **index page** that **redirect to** the **review page**. 
+So let's create a new review page and a button that **redirect to review page**.
+ (**tip:** just add a new route to your **app.json**, the framework will create the new page folder and files by itself). 
 
 ```html
 <!-- index.html -->
@@ -1389,7 +1491,7 @@ After the page creation let's create a **button** on the **index page** that **r
 </view>
 ```
 
-Now that we have created the new review page and a button to visit this page, we need to **fetch data stored on Leancloud and displays it**.
+The next step is to **fetch data stored on Leancloud and displays it**.
 
 **`Code snippet "fetch data stored on Leancloud and displays it" example.`**
 
@@ -1429,12 +1531,13 @@ Page({
 
 **Code snippet debrief:**    
 
-1. We created a **query** on the`AV` object which contains the data that fetch each form stored on Leancloud. 
-2. We **sort out** each form according to its creation date to finish by setting up the `forms` array. And display data in the view using the Mustache syntax.
+1. We are doing a **query** on the`AV` object which contains the data stored.
+2. Then we are **sorting out** each form according to its creation date to finish by setting up the `forms` array. 
+3.  Display data in the view using the Mustache syntax.
 
 
 ### Recommendations:
-In this use case we have just seen **how to store data** we collect to Leancloud and **how to fetch data stored** in Leancloud for display. 
+In this use case we have just seen **how to store data** we collect locally to Leancloud and **how to fetch data stored** from Leancloud. 
 
 I recommend that you read [Leancloud documentation](https://leancloud.cn/docs/leanstorage_guide-js.html#获取对象 ) or check the LeanTodo mini-program they pushed on their [Github repository](https://github.com/leancloud/leantodo-weapp)  and dig in facilities Leancloud offers.  
 
@@ -1442,7 +1545,7 @@ I recommend that you read [Leancloud documentation](https://leancloud.cn/docs/le
 
 When you are in production you have to **configure Leancloud domain name** in WeChat platform. [Follow this leancloud tutorial](https://leancloud.cn/docs/weapp-domains.html).  
 
-It enables request between your mini-program and Leancloud DB. 
+It enables requests between your mini-program and Leancloud DB. 
 
 
 ## WeChat API 
@@ -1450,9 +1553,11 @@ It enables request between your mini-program and Leancloud DB.
 ### Get user information
 WeChat "quickstart" (WeChat boilerplate) gives you a `getUserInfo` function in the **app.js** file. As the name suggests, this function is meant to **obtain user information**. Let’s go through this function step by step.
 
-  
- 1. `getUserInfo` function has a parameter **cb**, which is also a function.
- 2.  The`If`block of  `getUserInfo` function will be passed if `userInfo`form `globalData` is not null. 
+ 
+**General description:**  
+
+1. `getUserInfo` function has a parameter **cb**, which is also a function.
+2.  The`If`block of  `getUserInfo` function will be passed if `userInfo`form `globalData` is not null. 
 3. Otherwise`userInfo` is null, `getUserInfo` function is calling  the login interface.
 
 ```javascript
@@ -1487,7 +1592,7 @@ The if condition statement aims to determine if **cb argument** passed to get `g
 
 **How they figure out if cb parameter is a function?**
 
-In **index.js** (see snippet below), they call ` onLoad` function. The purpose of this`onLoad` function is to to retrieve `userInfo` when the index page will be loaded. And set `userInfo` data to the`App()` `globalData`.
+In **index.js** (see snippet below), the purpose of this`onLoad` function is to to retrieve `userInfo` when the index page will be loaded.
 
 ```javascript
 // index.js
@@ -1528,14 +1633,8 @@ If current user is already log in, **user information are assigned to** `globalD
 Wechat mini-programs have a **mechanism of cache in their API.** In fact, each mini-program has its own **local cache storage.** 
 
 **Reminder:**  
-The **cache** on a page takes a small amount of **faster and limited  storage**. Cache storage is used to store data we want to access quickly. It **reduces user waiting time**, since the **request** is satisfied **from the cache** which is closer to clients compared to the original server used to request your DB.
+The **cache** on a page takes a small amount of **faster and limited  storage**. Cache storage is used to store data we want to access quickly. It **reduces user waiting time**, since the **request** is satisfied **from the locla cache** which is closer to clients compared to the original server used to request your DB.
 
-WeChat provides three main actions on the cache:
-  
-- Save data in the cache,  **wx.setStorage**  or **wx.setStorageSync**.
-- Read data from the cache,   **wx.getStorage** or **wx.getStorageSync**.
-- Clear data of the cache,  **wx.clearStorage** or **wx.clearStorageSync**.
-- Remove data keys in the cache, **wx.removeStorage** or **wx.removeStorageSync**.
 
 Cache storage offers **two kind of methods** to store data in the cache:
 
@@ -1545,7 +1644,7 @@ Cache storage offers **two kind of methods** to store data in the cache:
 wx.setStorage ({key: 'name', data: 'Thibault'});
 ```
 
- `wx.setStorage` build parameters as a json,  the key has a key to specified the stored key and data specifies the key value to store. 
+ `wx.setStorage` build parameters as a json, a key to specified the stored key and data to specified the key value to store. 
 
 - The **asynchronous method**, used `wx.setStorageSync` syntax,  which get the data through the incoming callback function.
  
@@ -1553,24 +1652,30 @@ wx.setStorage ({key: 'name', data: 'Thibault'});
 wx.setStorageSync ('name', 'Thibault');
 ```
 
- `wx.setStorageSync` syntax is simpler,  parameters are directly passed into `wx.setStorageSync`. 
+ `wx.setStorageSync` syntax is simpler,  parameters are directly passed. 
 
-You can also pass **success, fail, and complete** to get data or error messages. 
 
-**`Code snippet "set cache and get data from cache"  by using the synchronous method`** 
+**WeChat provides three main actions on the cache:**
+  
+- Save data in the cache,  `wx.setStorage`  or `wx.setStorageSync`.
+- Read data from the cache,   `wx.getStorage` or `wx.getStorageSync`.
+- Clear data of the cache,  `wx.clearStorage` or `wx.clearStorageSync`.
+- Remove data keys in the cache, `wx.removeStorage` or `wx.removeStorageSync`.
+
+**`Code snippet "set cache and get data from cache (synchronous method)" exemple`**. 
 
 ```html
 <!-- .wxml -->
-<button type="primary" bindtap="listenerStorageSave">Stored information will be displayed in the text</button>
-  <text>{{storageContent}}</text>
-<button type="primary" bindtap="listenerStorageGet">Get storage storage information</button>
+<button type="primary" bindtap="listenerStorageSave">Save data to cache</button>
+  <text>{{dataCache}}</text>
+<button type="primary" bindtap="listenerStorageGet">Get data stored</button>
 ```
 
 ```javascript
 // index.js
 Page({ 
   data: {
-    storageContent: {
+    dataCache: {
       key: 'Key',
       data: 'Data'
     }
@@ -1593,7 +1698,7 @@ Page({
       success: function(res) {
         console.log(res)
         that.setData({
-          storageContent: res.data
+          dataCache: res.data
         })
       }
     })
@@ -1628,9 +1733,15 @@ You can **call up** your **client code scanner UI** by using the `wx.scanCode` A
 
 ### Location-based services
 
-The API provides services like `wx.openLocation`  to display locations on their **built-in map view.** Actually there are two ways to display a location the `wx.chooseLocation`  to **choose the location you want to display** or the `wx.getLocation` **to get and display the location of your visitor.**
+WeChat API provides a full set of location-based services:  
 
-`Code snippet "get location" example.`
+- **`wx.chooseLocation`** to choose the location you want to display.
+- **`wx.getLocation`** to get current user location.
+- **`wx.openLocation`** to display location on their **buit-in map view**. 
+- **`wx.createMapContext`** to personalize your map.
+
+
+**`Code snippet "get location" example.`**
 
 ```html
 <!-- .wxml --> 
@@ -1655,21 +1766,25 @@ listenerBtnGetLocation: function () {
 
 Above we used the `wx.getLocation` to retrieve current user  position by getting his **latitude** and **longitude.**
 
-**Display the current user location on the built-in map:**  
-`wx.openLocation`API call, enables the opening  of  Wechat built-in map  view in order to display the location you got from `listenerBtnGetLocation:` function above. **Note,** the `wx.openLocation` API call redirects your visitors directly on a new map window. 
+**`wx.getLocation` further details:**  
+If a user leaves the mini-program but display on top of his chat the mini-program  you can continue to call  `wx.getLocation`and so get user location continiously.
 
-`Code snippet "Display the current user location on WeChat built-in map:" example.`
+**Display the current user location on WeChat built-in map:**  
+`wx.openLocation`API call, enables the opening  of  WeChat built-in map view in order to display the location you got from `listenerBtnGetLocation` function we created above. 
 
- 
+**Note:** `wx.openLocation` API call, redirects user directly on a new map window. 
+
+**`Code snippet "display the current user location" example.`**
+
  ```javascript
  // .js 
-  listenerBtnGetLocation: function () {
+listenerBtnGetLocation: function () {
   wx.getLocation({
   type: 'wgs84',
   success: function(res) {
     var latitude = res.latitude
     var longitude = res.longitude
-   wx.openLocation({
+    wx.openLocation({
       latitude: latitude,
       longitude: longitude,
       scale: 28
@@ -1677,11 +1792,20 @@ Above we used the `wx.getLocation` to retrieve current user  position by getting
    }
   })
  }
- ``` 
-### Image upload
-Wechat image API offers the possibility to **choose an image from your album** or **use the camera to take a picture** and then **preview the image** before **uploading it to the mini-program.** In this exapmle  we create a function  called `listenerButtonChooseImage:` with the aim of calling  user album and choose an image.
+ ```
+ 
 
-`Code snippet "choose an image" example.`
+### Image upload
+
+Concerning images, WeChat API offers four possibilities:
+
+- `wx.chooseImage` to choose an image from your album.
+- `wx.previewImage` to preview the image before the upload on the app.
+- `wx.saveImageToPhotosAlbum` to save image from the mini-program to your album.
+
+In this example we created a function  called `listenerButtonChooseImage` with the aim of calling  user album and choose an image.
+
+**`Code snippet "choose an image" example.`**
 
 ```html
 <!-- .wxml --> 
