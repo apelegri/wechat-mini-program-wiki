@@ -26,8 +26,8 @@
     	- [Import a template](#import-a-template)
     	- [Define a template](#define-a-template)
     - [Events](#events)
-    	- [Event handler:](#event-handler)
-    	- [Event binding:](#event-binding)
+    	- [Event handler](#event-handler)
+    	- [Event binding](#event-binding)
     	- [Event types classification](#event-types-classification)
     - [Mini-program sharing](#mini-program-sharing)
     	- [Enable the forward button of the drop-down menu](#enable-the-forward-button-of-the-drop-down-menu)
@@ -56,7 +56,7 @@
     - [Data cache](#data-cache)
     - [Open the QR code scanner](#open-the-qr-code-scanner)
     - [Location-based services](#locationbase-services)
-    - [Image upload](#image-upload)
+    - [Image](#image)
 
 ## Registration process
 The registration process is really tough and even more if you don’t have any experience with the pleasure of Chinese administrative world. 
@@ -179,10 +179,10 @@ The index page of this boilerplate displays a welcome page with the current user
 ### Root directory
 
 
-Wechat mini-programs start with **"app" files** (see the screen shot below). These files are mini-program root directory and so the entrance of your mini-program.  (Here is the official [WeChat documentation](https://mp.weixin.qq.com/debug/wxadoc/dev/framework/structure.html )). 
+WeChat mini-programs start with **"app" files** (see the screen shot below). These files are mini-program root directory and so the entrance of your mini-program.  (Here is the official [WeChat documentation](https://mp.weixin.qq.com/debug/wxadoc/dev/framework/structure.html )). 
 
 ![root directory](assets/root-directory.png)
-**app.js** is the script code, the global logic of your mini-program. You can setup and manipulate the [life cycle functions](#application-life-cycle) of your MP, declare global variables or call the API.
+**app.js** is the script code, the global logic of your mini-program. You can setup and manipulate the [life cycle functions](#application-life-cycle) of your MP, declare global variables or call an API.
 
 **`Code snippet of the "app.js" file.`** 
 
@@ -472,7 +472,7 @@ Page({
   // Event handler
   viewTap: function() {
     this.setData({
-      text: 'Set some data for updating view.'
+      text: 'Set some data.'
     })
   }
 })
@@ -494,7 +494,7 @@ When the mini-program is running from the background (app life cycle) to the for
  
 ## Core setup of your MP
 The setup of your mini-program is simple
-and designed  to save you time or being frustrated if you have customization needs. Below is the complete setup of the **app.json** file.  
+and designed  to save you time or being frustrated if you have customization needs.   
   
 WeChat divides the **app.json configuration** in five parts:  
  
@@ -520,7 +520,8 @@ In this part we will **break-down** this complete **app.json setup** exemple.
     "navigationBarTextStyle": "white",
     "navigationBarTitleText": "Le Wagon",
     "backgroundColor": "#eeeeee",
-    "backgroundTextStyle": "light"
+    "backgroundTextStyle": "light",
+    "enablePullDownRefresh": true
   },
   "tabBar": {
     "backgroundColor": "#FFFFFE",
@@ -571,7 +572,7 @@ Each time you **add a route path** to `"pages"`, the framework will **automatica
 **Routing mode description:** 
 
 - **Initialization:** 
-Once the mini-program is launched, the first page load by calling the `onLoad` and`onShow` function.
+Once the mini-program is launched, the first page is loaded by calling the `onLoad` and`onShow` function.
 
 - **Open a new page:** 
 Opening a new page hides the current page and jumps to another one using the `wx.navigateTo`. 
@@ -579,13 +580,13 @@ Behind the scene the first page will be hidden by the call of the **onHide** fun
  ![App affects page ](assets/added-layers.png)  
  
 - **Page redirection:** 
-Close the current page by calling **onUnload** and jump to a page within the app using `wx.redirectTo` which call **onLoad** and **onShow** functions.
+Close the current page by calling **onUnload** and jumps to a page within the app using `wx.redirectTo` which call **onLoad** and **onShow** functions.
 
 - **Page return:** 
 `onUnload` the current page, calls `onLoad` function and then displays the target page by calling `onShow`.
 
 - **Reloading,** `wx.reLaunch`:
-Close all pages and reload the current page.
+Close all pages and reloads the current page.
 
 - **Switch tabs,**  `wx.switchTab`: Jumps from one tabBar page to another one and close or hides all other non-tabBar pages by using **onUnload, onHide and onShow**, discover all possible [scenarios for tabs switching](https://mp.weixin.qq.com/debug/wxadoc/dev/framework/app-service/route.html).  
  
@@ -667,7 +668,7 @@ The window item is used to set mini-program title and common window style.
    "navigationBarTitleText": "Le Wagon",
    "backgroundColor": "#eeeeee",
    "backgroundTextStyle": "light",
-   "enablePullDownRefresh": "true"
+   "enablePullDownRefresh": true
   }
  ``` 
   
@@ -675,6 +676,21 @@ The window item is used to set mini-program title and common window style.
 
  ![window configuration](assets/window-config.png)    
  
+ 
+`"enablePullDownRefresh": true` needs to be configured in the global **app.json** as above and then you can call it in pages of your mini-program.
+
+ **`Code snippet  of the "Enable pull-down refresh ina page" file.`** 
+ 
+ ```javascript
+ // .js
+ Page({
+   // Pull down the trigger event 
+  onPullDownRefresh() {
+    // Stop the dropdown refresh
+    wx.stopPullDownRefresh()
+  }
+})
+ ```
 
 ### Network timeout
 
@@ -879,7 +895,7 @@ More details on WeChat documentation [here](https://mp.weixin.qq.com/debug/wxado
 
 ### Events
 
-#### Event handler:  
+#### Event handler
   
 In addition to data initialization and life cycle functions, the framework allows to define **event handling functions.** 
 
@@ -911,7 +927,7 @@ This function **updates data** within the logical layer which next will be send 
 `setData()` function receives an object as a parameter and updates the key value by using `this.data` as a **data path.**  
 
 
-#### Event binding:  
+#### Event binding
   
 There are many kind of binding events, most components have their own definition of binding event.  
 
@@ -926,9 +942,9 @@ There are many kind of binding events, most components have their own definition
 ```html
 <!-- form.wxml -->
 <form bindsubmit="bindFormSubmit">
-  ...
+  <!-- Inputs -->
   <button type="primary" form-type="submit">Submit</button>
- </form>
+</form>
 ```
 
 ```javascript
@@ -936,7 +952,7 @@ There are many kind of binding events, most components have their own definition
 // Form submission function
 Page({
  bindFormSubmit: function(e) {
- ...
+   // Treatment
  }
 })
 ```
@@ -1242,6 +1258,40 @@ Page({
  })
 }) 
 ```  
+
+
+### Modal 
+
+A modal box allows to **overlay a small element over a page**. The primary benefit of modal boxes it that they avoid the need to use of conventional window pop-ups or page reloads.
+
+ ![modal image](assets/modal-img.png)
+
+There are five situational categories where modal boxes are commonly used:
+
+- **Error:** To alert users of an error.
+- **Warning:** To warn users of potentially harmful situations.
+- **Data:**To collect data from users.
+- **Confirm or Prompt:** To remind users to do something before moving on.
+- **Helper:** To inform users of important information.
+
+```javascript
+wx.showModal({
+   title: 'Modal title',
+   content: 'Modal content ',
+   confirmText: "Ok",
+   showCancel: false,
+   success: function (res) {        
+      console.log('success')
+    }
+ })
+```
+
+ **`Code snippet "modal to inform user" example.`**
+
+**Modal parameters:**
+
+![modal parameters](assets/modal-parameters.png)
+
 
 ### Scroll view 
 Scroll views has one main purpose, it lets users drag the area of the content they want to display. Mostly used to **scroll content that will not fit entirely on the screen**.
@@ -1795,37 +1845,113 @@ listenerBtnGetLocation: function () {
  ```
  
 
-### Image upload
+### Image
 
-Concerning images, WeChat API offers four possibilities:
+ WeChat image API offers four possibilities:
 
-- `wx.chooseImage` to choose an image from your album.
-- `wx.previewImage` to preview the image before the upload on the app.
-- `wx.saveImageToPhotosAlbum` to save image from the mini-program to your album.
+- **`wx.chooseImage`** to choose an image from your album or camera.
+- **`wx.previewImage`** to preview the image before the upload on the app.
+-  **`wx.getImageInfo`** to get image information (height, width, path, src )
+- **`wx.saveImageToPhotosAlbum`** to save image from the mini-program to your album.
 
-In this example we created a function  called `listenerButtonChooseImage` with the aim of calling  user album and choose an image.
 
-**`Code snippet "choose an image" example.`**
+In the example below we create a function  called `listenerBtnChooseImage` with the aim of calling  user album or camera by using `wx.chooseImage`.  Then we are using `wx.getImageInfo` to get image information.
+
+**`Code snippet "upload an image form album or camera" example.`**
 
 ```html
 <!-- .wxml --> 
-<button type="primary" bindtap="listenerButtonChooseImage">Click me to call the album</button>
+<button type="primary" bindtap="listenerBtnChooseImage">Upload Image</button>
+<!-- Display the image user upload --> 
+<image src="{{src}}" mode="aspecFill"  bindlongtap="imgLongTap"/>
 ```
 
 ```javascript
 // .js
-listenerButtonChooseImage: function (){
-  var that = this
-  wx.chooseImage({
-    count: 1,
-    sizeType: ['original'], 
-    sourceType: ['album'],
-    success: function (res) {
-     that.setData ({
-         source: res.tempFilePaths
-     })
-    console.log(source)
-   }
- })
-}
+Page({
+  data: {
+    src: []
+  },
+  listenerBtnChooseImage: function () {
+    var that = this
+    // Upload an image
+    wx.chooseImage({
+      count: 1,
+      sizeType: ['original', 'compressed'], 
+      sourceType: ['album', 'camera'],
+      success: function (res) {
+        console.log('success')
+        that.setData({
+          src: res.tempFilePaths
+        })
+        // Get image info
+        wx.getImageInfo({
+          src: res.tempFilePaths[0],
+          success: function (res) {
+            console.log(res.width)
+            console.log(res.height)
+            console.log(res.path) 
+          }
+        })
+       }
+     })  
+   } 
+})
+```
+
+Now that we have an image on the page let's save the image from the mini-program to current user album by longtapping the image. 
+
+**`Code snippet "longtap the image to save it in user abum" example.`**
+
+```html
+<!-- .wxml -->  
+<image src="{{src}}" mode="aspecFill"  bindlongtap="imgLongTap"/>
+```
+
+```javascript 
+// .js
+Page({
+  data: {
+    src: []
+  },
+  listenerBtnChooseImage: function () {
+    var that = this
+    // Upload an image
+    wx.chooseImage({
+      count: 1,
+      sizeType: ['original', 'compressed'], 
+      sourceType: ['album', 'camera'],
+      success: function (res) {
+        console.log('success')
+        that.setData({
+          src: res.tempFilePaths
+        })
+        // Get image info
+        wx.getImageInfo({
+          src: res.tempFilePaths[0],
+          success: function (res) {
+            console.log(res.width)
+            console.log(res.height)
+            console.log(res.path) 
+          }
+        })
+       }
+     })  
+   } ,
+   // Longtap function 
+   imgLongTap: function (){
+      // Save image to album 
+      wx.saveImageToPhotosAlbum({
+        filePath: this.data.src,
+        success(res) {
+          wx.showToast({
+            title: 'Save',
+            icon: 'success',
+            duration: 1500
+          })
+        console.log('success')
+      }
+    })
+  } 
+})  
 ```
