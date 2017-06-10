@@ -1,11 +1,27 @@
 # WeChat mini-program whitebook
 
 ### PREFACE
-China’s top messaging app WeChat rolled out something quite radical: mini-programs. Embedded apps which require no download, no install. Open, use, share, done! #### Yes, it's not perfect...There is large debate – *and many clickbaits* – about how practical these apps are... Indeed the framework provided to developers is only at infancy stage, still limited, and honestly a bit frustrating. Nevertheless Tencent is investing unprecedented resources into the adoption of this channel, building momentum, and opening opportunities to the first-movers. We believe that these hackers may find quick-wins if they dare to give it a try. Got ideas of services you would like to deploy in WeChat asap? Have basic knowledge of Javascript and want to experiment with this framework? Got lost in the Google translation of the doc? Need a small boost to decrypt what is possible or not? Hello and welcome. #### Why this whitebook
-Finding your way through the official doc is not easy. In fact, it requires a lot of trial/errors, some research on open-source code and many assumptions to get something done. You have been banging your head on the wall. We get it.Our mission is to help creative entrepreneurs build great tech products. We will help you take the small steps. 
+China’s top messaging app WeChat rolled out something quite radical: mini-programs. Embedded apps which require no download, no install. Open, use, share, done! 
 
-The whitebook below is not a translation of the documentation and will surely be outdated fast. It is simply our contribution to help any one get started and build a cool WeChat Mini-program fast. **Do it now.**### Get in touchDo [reach out to us](http://lewagon.com/shanghai) if you’d like to share your work and ask for help!Or if you want to contribute, you can give us a shout on Shanghai@lewagon.com or send a Pull Request [here](https://github.com/apelegri/wechat-miniprogram-whitebook/pulls).
-### Acknowledgements
+#### Yes, it's not perfect...
+There is large debate – *and many clickbaits* – about how practical these apps are... Indeed the framework provided to developers is only at infancy stage, still limited, and honestly a bit frustrating. Nevertheless Tencent is investing unprecedented resources into the adoption of this channel, building momentum, and opening opportunities to the first-movers. We believe that these hackers may find quick-wins if they dare to give it a try. 
+
+Got ideas of services you would like to deploy in WeChat asap? Have basic knowledge of Javascript and want to experiment with this framework? Got lost in the Google translation of the doc? Need a small boost to decrypt what is possible or not? Hello and welcome. 
+
+#### Why this whitebook
+
+Finding your way through the official doc is not easy. In fact, it requires a lot of trial/errors, some research on open-source code and many assumptions to get something done. You have been banging your head on the wall. We get it.
+
+Our mission is to help creative entrepreneurs build great tech products. We will help you take the small steps. 
+
+The whitebook below is not a translation of the documentation and will surely be outdated fast. It is simply our contribution to help any one get started and build a cool WeChat Mini-program fast. **Do it now.**
+
+### Get in touch
+Do [reach out to us](http://lewagon.com/shanghai) if you’d like to share your work and ask for help!
+
+Or if you want to contribute, you can give us a shout on Shanghai@lewagon.com or send a Pull Request [here](https://github.com/apelegri/wechat-miniprogram-whitebook/pulls).
+
+### Acknowledgements
 
 This piece was written by [Adrien Pelegri](https://github.com/apelegri) with the support of [Thibault Genaitay](https://github.com/tgenaitay) and [Stephane Delgado](https://github.com/stephanedelgado).
 
@@ -73,43 +89,43 @@ This piece was written by [Adrien Pelegri](https://github.com/apelegri) with the
     - [Image](#image)
 
 ## Registration process
-The registration process is really tough and even more if you don’t have any experience with the pleasure of Chinese administrative world. 
-WeChat verification process will be recurrent all along your path to register, keep calm.
+The registration process is really tough, especially if you don’t have any experience with the fantastic Chinese administrative world. 
+The WeChat verification process will be long. Keep your calm.
 
-From WeChat mini-program registration to the development release you need to go through these steps: 
+From the WeChat mini-program registration, until the development release, you basically need to go through these steps: 
 
-- [Create an account](https://mp.weixin.qq.com) on WeChat.
+- [Create an account](https://mp.weixin.qq.com) on WeChat back-end.
 - **Pick the right type of application** and go through the registration process.
-- Completion of **mini-program certification**.
-- Fill in mini-program information.
+- Complete the **mini-program certification** process.
+- Fill in your mini-program information.
 
-Here is a list of materials you will need to register for a mini-program as a company:
+Here is a list of materials you will need to register a mini-program as a company:
 
 * Email, to create your Wechat account. 
-* Chinese ID.
-* Phone number, to certify your identity during verification process.
-* Chinese business license, to register as an enterprise or individual vendor.
+* Chinese ID. This person will own the account and scan QR codes a lot.
+* Phone number, to certify your identity during the verification process.
+* Chinese business license, to register as an enterprise.
 * Company documents: organisation code, certificate and enterprise bank account.
-* Fill in the official request letter they provide, signed it (by the administrator) and stamped it with the enterprise stamp to send it back.
+* Fill in the official letter Tencent provides, sign it (by the admin) and stamp it with the enterprise stamp. Upload it.
 
-Follow this complete manual on how to register and create a mini-program project, [Medium article](https://medium.com/@yelin.qiu/a-complete-manual-on-wechat-mini-program-development-8fd28a85ee0d) 
-or [WeChat documentation](https://mp.weixin.qq.com/debug/wxadoc/introduction/index.html?t=201758) (Chinese).
+We recommend you follow this comprehensive English manual on how to register and create a mini-program project: [Medium article](https://medium.com/@yelin.qiu/a-complete-manual-on-wechat-mini-program-development-8fd28a85ee0d) 
+or check this [official WeChat documentation](https://mp.weixin.qq.com/debug/wxadoc/introduction/index.html?t=201758) (Chinese).
 
 ## WeChat IDE
 
-**Definition:**  
-An [IDE](https://mp.weixin.qq.com/debug/wxadoc/introduction/index.html?t=201758) (integrated development environment)  is a set of programming tools for writing application which consists of a code editor, a compiler and a debugger accessible through a single graphical user interface. 
+**What's this?**  
+An [IDE](https://mp.weixin.qq.com/debug/wxadoc/introduction/index.html?t=201758) (integrated development environment)  is a set of programming tools for writing an application. It consists of a code editor, a compiler and a debugger, accessible through a single graphical user interface. 
  
-Download WeChat IDE: 
+Download the WeChat IDE here: 
  [Mac](https://servicewechat.com/wxa-dev-logic/download_redirect?type=darwin&from=mpwiki), [Windows 64](https://servicewechat.com/wxa-dev-logic/download_redirect?type=darwin&from=mpwiki), [Windows 32](https://servicewechat.com/wxa-dev-logic/download_redirect?type=ia32&from=mpwiki)
  
 
-**The following is a quick tutorial to master WeChat  IDE**  
+**Quick tutorial to master the WeChat IDE**  
 
-A **Code editor** with the arboresence of your files on the side and a **Simulator** on the left which displays the preview of your interface.
+A **Code editor** with the tree of your files on the side and a **Simulator** on the left, which displays the preview of your app.
 ![IDE Wechat home](assets/code-editor.png)
 
-A complete list of call to actions, buttons to perform tasks when you are in development:  
+Here is a complete list of buttons to perform tasks when you are in development:  
 
 ![IDE cta](assets/ide-home.png)
 
@@ -131,19 +147,19 @@ A complete list of call to actions, buttons to perform tasks when you are in dev
 
 
 **Debugger / Inspector:**  
-This tool is an important part of the IDE, it looks like Chrome DevTools but it is slightly different. 
+This tool is an important part of the IDE, it looks like the good old *Chrome DevTools*. 
 ![IDE debugger](assets/debugger.png)
 
  **1. Top bar** 
       
  **Network:** This panel is to debug request and socket issues or page load performance.  
-**Storage:** Is the access to the data you have in your cache.  
+**Storage:** allows to access all the data you have in your cache.  
 **AppData:** is used to display the current project data. You can directly edit the data in the panel and preview it.   
 **Wxml:** let you inspect and edit on the fly every elements of your page.  
-**Sensor:** you can simulate location and the perfomance of the mobile device to debug gravity sensing.  
+**Sensor:** you can simulate location and the performance of the mobile device to debug gravity sensing.  
   
  **2. Sources panel**   
-Sources panel display the current project script file.  
+Sources panel displays the current project script files.  
    
  **3. Console**  
  The console will let you know what errors you have in your code by logging diagnostic information and interact with javascript in the page as your **console.log()** you have placed and more. 
@@ -153,12 +169,12 @@ Sources panel display the current project script file.
 This page is where you will find the current project details as your AppID, directory information and more.  By clicking on the **preview option** you will be able to test the mini-program directly on your phone after scanning a QR code.
 
 **Note:**
-When you test your mini-program on the phone you can enable the debugger tool directly on the phone.    
+While you are testing your mini-program on your phone, you can enable the debugger tool directly on your device.    
 
 ![project information](assets/project-information.png) 
 
 ## Dig into the "quickstart" project
-This section will drag you along the structure of the **"quickstart" provided by WeChat** (their boilerplate) and the fundamentals you need to comply with this environment.   
+This section will introduce the structure of the **"quickstart" provided by WeChat** (boilerplate) and the fundamentals you need to comply with this framework.   
  
 Download WeChat [quickstart.zip](assets/quickstart.zip). 
 
@@ -182,16 +198,15 @@ Download WeChat [quickstart.zip](assets/quickstart.zip).
 │       └── logs.wxss
 └── <strong style="color: #117B8D">utils</strong>
     └── util.js
-   </code>
 </pre>
 
 
-The index page of this boilerplate displays a welcome page with the current user porfile's information. A click on your avatar will redirect to a new page displaying your current mini-program logs. 
+The index page of this boilerplate displays a welcome page with the current user profile's information. A click on your avatar will redirect to a new page displaying your current mini-program logs. 
 
 ### Root directory
 
 
-WeChat mini-programs start with **"app" files** (see the screen shot below). These files are mini-program root directory and so the entrance of your mini-program.  (Here is the official [WeChat documentation](https://mp.weixin.qq.com/debug/wxadoc/dev/framework/structure.html )). 
+WeChat mini-programs start with **"app" files** (see the screenshot below). These files are the mini-program root directory therefore the entrance of your mini-program.  (Here is the official [WeChat documentation](https://mp.weixin.qq.com/debug/wxadoc/dev/framework/structure.html )). 
 
 ![root directory](assets/root-directory.png)
 **app.js** is the script code, the global logic of your mini-program. You can setup and manipulate the [life cycle functions](#application-life-cycle) of your MP, declare global variables or call an API.
@@ -233,7 +248,7 @@ App({
 })
 ```
 
-**app.json** is the global configuration of the overall mini-program. You can configure, MP (mini-program) page’s path, MP window, set the network timeout and debug configuration. 
+**app.json** is the global configuration of the overall mini-program. You can configure, MP (mini-program) page’s path, the MP window style, set the network timeout and debug configuration. 
 
 **`Code snippet of the "app.json" file.`** 
 
@@ -253,7 +268,7 @@ App({
 ```
 **Note:** you cannot add any comment in the **app.json**.
 
-**app.wxss** is the global style sheet of the mini-program. You should declare common style rules.
+**app.wxss** is the global style sheet of the mini-program. You should declare common style rules here.
     
 ### WeChat "quickstart" pages 
 
@@ -281,7 +296,7 @@ Each page of your mini-program can be composed of four different file extensions
 
   
 **Further details:**  
-A new page will contain at a minimum a **.js** file and a **.wxml** file. The **.json** file extension is used just in case you want to change the [window configuration](#window) in this particular page. And **.wxss** if you want to add a style sheet to your page.
+A new page will always contain a **.js** file and a **.wxml** file minimum. The **.json** file extension is used just in case you want to override the [window configuration](#window) in this particular page. Add **.wxss** if you want to add a style sheet to your page.
 
 Let's see what happens in each page of the quickstart project.  
 
@@ -574,10 +589,10 @@ In this part we will **break-down** this complete **app.json setup** exemple.
 ``` 
 
 **Tip:**  
-Each time you **add a route path** to `"pages"`, the framework will **automatically create** the folder and files that corresponds to the path  you just created. 
+Each time you **add a route path** to `"pages"`, the IDE will **automatically create** the folder and files that corresponds to the path  you just created. 
 
 
-**WeChat framework, brings in several routing logics:**   
+**The WeChat framework brings several routing logics:**   
 
  ![App affects page ](assets/routing-mode.png)   
  
@@ -736,23 +751,23 @@ Page({
 
 ### Network timeout
 
-Network timeout may be provided in a variety of network request. 
-Here is the link to [WeChat documentation](https://mp.weixin.qq.com/debug/wxadoc/dev/framework/config.html )  if you want to go further.
+Network timeout may be provided in a variety of network requests. 
+Here is the link to the [WeChat documentation](https://mp.weixin.qq.com/debug/wxadoc/dev/framework/config.html )  if you want to go further.
 
 ### Debug
 
-Here is a link to [WeChat documentation](https://mp.weixin.qq.com/debug/wxadoc/dev/framework/config.html).
+Here is a link to the [WeChat documentation](https://mp.weixin.qq.com/debug/wxadoc/dev/framework/config.html).
 
 
 ## Create dynamic pages
   
 ### WXML - HTML, what's the deal?
-**WXML** is WeChat markup language similar to HTML. It combines a **basic library of components** and **an event system** to build dynamic pages. 
+**WXML** is a WeChat markup language similar to HTML. It combines a **basic library of components** and **an event system** to build dynamic pages. 
 
 
-WeChat event system behaves like classic Javascript events which **handle logical responses to the view layer.**  
+The WeChat event system behaves like classic Javascript events which **handle logical responses to the view layer.**  
  
- The table below lists the **significant  differences** you faced in development between **WXML / HTML:**  
+ The table below lists the **significant differences** you will face in development between **WXML / HTML:**  
   
  ![wxml and html differences](assets/wxml-html.png)  
  
@@ -760,7 +775,7 @@ WeChat event system behaves like classic Javascript events which **handle logica
   
 ### Data binding
  
-Mini-program framework does not allow developers to use the DOM to control your WXML elements. Instead, you will **update your view layer** (.wxml file) **via data binding method:**  
+The Mini-program framework does not allow developers to use the DOM to control your WXML elements. Instead, you will **update your view layer** (.wxml file) **via data binding method:**  
 
  ![wxml and html differences](assets/data-binding.png)  
  
@@ -831,14 +846,14 @@ Similar to `view wx:for` you can use **`block wx:for`** to render **multiple lin
 ```
 For more details on the code above see this [Github repository](https://github.com/apelegri/wagonform-wechat-mp/tree/master/pages/form). 
 
-**Further ressources:**
+**Further resources:**
 
 - For more details about list rendering refer to [WeChat documentation ](https://mp.weixin.qq.com/debug/wxadoc/dev/framework/view/wxml/list.html ).
 
 
 ### Conditional rendering: wx:if, wx:elif, wx:else 
 
-Similar to `wx:for`, **`wx:if`** is used to define a condition statement and determines if the block should be rendered or not.  
+Similar to `wx:for`, **`wx:if`** is used to define a condition statement and to determine if the block should be rendered or not.  
   
 **`Code snippet "wx:if" example.`**
  
@@ -872,13 +887,13 @@ Dig further in `wx:if` [WeChat documentation](https://mp.weixin.qq.com/debug/wxa
  
 ### Template
 
-Template allows to define code snippet you want to reuse several times in different files of your mini-program.
+Templates allow to define code snippets you want to reuse several times in different files of your mini-program.
 
 WXML template item has its own scope and can only use data to pass in.
 
 #### Define a template 
 
- First, to declare a template you need to define the template name.
+First, to declare a template you need to define its name.
 
 **`Code snippet  "template" example. `**
  
@@ -895,7 +910,7 @@ WXML template item has its own scope and can only use data to pass in.
 <template is="msgItem" data="{{item}}"/>
 ```
 
-Later on if you want to call  a template within the same file use the **`is` attribute** and the **template name as a value** to declare the required template. And don't forget to pass data to the template using the `data` attribute.   
+Later on if you want to call a template within the same file use the **`is` attribute** and the **template name as a value** to declare the required template. And don't forget to pass data to the template using the `data` attribute.   
 
 ```javascript
 // .js
@@ -931,7 +946,7 @@ To declare a template already defined in a new file you first have to import the
 <template is="item" data="{{text: 'forbar'}}"/>
 ```
 
-More details on WeChat documentation [here](https://mp.weixin.qq.com/debug/wxadoc/dev/framework/view/wxml/template.html).
+More details on the WeChat documentation [here](https://mp.weixin.qq.com/debug/wxadoc/dev/framework/view/wxml/template.html).
 
 ### Events
 
@@ -1069,7 +1084,7 @@ Page({
 
 ### Mini-program sharing
 
-Here are practical tips to leverage from mini-program sharing. 
+Here are practical tips to enable the mini-program sharing. 
 WeChat opens up two ways to share a mini-program:
 
 ![forwarding opportunity](assets/forward-mp.png)  
