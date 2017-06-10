@@ -808,7 +808,7 @@ The `wx:for` control property binds an array from your logical layer (.js file),
 Page({
   data: {
     array: [{
-      message: 'foo',
+      message: 'foo'
     }, {
       message: 'bar'
     }]
@@ -945,7 +945,7 @@ WXML element (event handler) triggers the event and the **logical layer binds th
  
 ```html
 <!-- .wxml -->
-<view bindtap="add">{{count}}</view>
+ <button bindtap="add" type="primary">{{count}}</button>
 ```  
 
 ```javascript
@@ -1078,7 +1078,7 @@ WeChat opens up two ways to share a mini-program:
 
 2. **Create a forward button within the page** of your mini-program. It makes the sharing process more user friendly.
 
-In both variants, the framework will **automatically** forward a mini-program card with a **screen shot** of your MP header. 
+In both variants, the framework will **automatically** forward a mini-program card with a **screen shot** of the mini-program current page. The screen shot start at the top of the page with a screen height of 80%. 
 
 #### Enable the forward button of the drop-down menu
 
@@ -1268,11 +1268,15 @@ A toast is a non-modal element used to display brief and auto-expiring component
 
  ![switch image](assets/toast-img.png) 
  
+ In the code snippet below we are faking a form submission to show how a toast is working and display.
+ 
  **`Code snippet "spinner btn and toast" example.`**
    
 ```html
 <!-- .wxml -->
-<button type="primary" form-type="submit" loading="{{loading}}">Send</button>
+<form bindsubmit="bindFormSubmit">
+ <button type="primary" form-type="submit" loading="{{loading}}">Send</button>
+</form>
 ```   
 In the code snippet above we created a **dynamic button** with a **purpose of  submitting a form**. The button is animated 
 by a [loading spinner](https://weui.io/#loadmore) when you click on it. 
@@ -1282,22 +1286,23 @@ by a [loading spinner](https://weui.io/#loadmore) when you click on it.
 Then we display a toast  by using `wx.showToast` API  to inform users. 
 
 ```javascript
-// .js
 Page({
-  data:{
+  data: {
     loading: false
   },
- // Enable loading animation on send btn
- this.setData({
-   loading: !this.data.loading
- })
- // Loading toast
- wx.showToast({
-    title: 'Sending...',
-    icon: 'loading',
-    duration: 1500
- })
-}) 
+  bindFormSubmit: function (e) {
+    // Enable loading animation on send btn
+    this.setData({
+      loading: !this.data.loading
+    })
+    // Loading toast
+    wx.showToast({
+      title: 'Sending...',
+      icon: 'loading',
+      duration: 1500
+    })
+  }
+})
 ```  
 
 
@@ -1406,19 +1411,15 @@ Here is the [Github repository](https://github.com/apelegri/wagonform-wechat-mp)
 ```html 
 <!-- pages/form/form.wxml -->
 <form bindsubmit="bindFormSubmit">
- <view class="header-form">
-  <view class="h2-form">About the workshop</view>
- </view>
- <view class="user-input">
-  <view class="input-label">Generally how was this workshop?</view>
-  <text class="label-details">Hints: takeaway, speed, time, location, people...</text>
-  <view class="text-area-wrp">
-   <textarea class="input-height" name="review" maxlength="-1" />
+  <view>About the workshop</view>
+  <view>Generally how was this workshop?</view>
+  <text>Hints: takeaway, speed, time, location, people...</text>
+  <view>
+   <textarea name="review" maxlength="-1" />
   </view>
   <!-- Refer to the Github repository above if you want the complete form -->
   <button type="primary" form-type="submit">Send</button>
  </form>
-</view>
 ```
 When the **structure of the form** is created as above, next we need to **create the event**  which is trigerred by the form submission.
 
@@ -1453,7 +1454,7 @@ To get started with Leancloud setup, first [create an account](https://leancloud
 
 Now that you are ready for the installation and initialization of Leancloud in your mini-program you can follow their [documentation](https://leancloud.cn/docs/weapp.html#存储) that will let you go through a **two-step process:** 
  
--  The installation of the **av-weapp-min.js**  in your  **util.js** file. 
+-  The installation of the **av-weapp-min.js**  in your  **utils** folder. 
 -  The initialization of  the app by adding Leancloud `appId` and `appKey` in your **app.js**.
 
 ```javascript
@@ -1491,6 +1492,9 @@ Now that you have instantiated the `Form` object,  **create the  form object** t
 **`Code snippet "bindFormSubmit function" example.`** 
 
 ```javascript  
+const AV = require('../../utils/av-weapp-min.js');
+const form = require('../../model/form.js');
+
 // pages/form/form.js
 bindFormSubmit: function(e) {
    // Local storage
