@@ -69,7 +69,6 @@ This original piece was written by Le Wagon alumni: [Adrien Pelegri (Batch #30)]
     - [Switch](#switch)
     - [Toast](#toast)
     - [Modal](#modal)
-    - [Scroll view](#scroll-view)
 - [Leancloud DB](#leancloud-db)
     - [1. Create a form](#1-create-a-form) 
     - [2. Install and initialize Leancloud](#2-install-and-initialize-leancloud)
@@ -968,7 +967,7 @@ WXML element (event handler) triggers the event and the **logical layer binds th
  
 ```html
 <!-- .wxml -->
-<view bindtap="add">{{count}}</view>
+<button type="primary" bindtap="add">Incrementation: {{count}}</button>
 ```  
 
 ```javascript
@@ -1026,6 +1025,20 @@ Page({
 - **`bind+event_type`**
 - **`catch+event_type`** 
 
+
+**`Code snippet "data binding illustration" example.`**
+
+```html
+<button bindtap="ontap" type="primary">Tap<button/>
+```
+
+```javascript
+Page({
+  ontap: function() {
+    console.log('tap');
+  }
+})
+```
 
 The two common binding events used are `bind+event_type` and `catch+event_type`. The **catch event** is the one that prevent against bubbling events.  
  
@@ -1725,49 +1738,72 @@ wx.setStorageSync ('name', 'Thibault');
 - Clear data of the cache,  `wx.clearStorage` or `wx.clearStorageSync`.
 - Remove data in the cache, `wx.removeStorage` or `wx.removeStorageSync`.
 
-**`Code snippet "set cache and get data from cache (synchronous method)" exemple`**. 
+**`Code snippet "set cache  (synchronous method)" exemple`**. 
 
 ```html
-<!-- .wxml -->
-<button type="primary" bindtap="listenerStorageSave">Save data to cache</button>
-  <text>{{dataCache}}</text>
-<button type="primary" bindtap="listenerStorageGet">Get data stored</button>
+<!-- index.wxml -->
+<input style="input" placeholder="Input data" bindinput="inputEvent" />  
+<button type="warn" bindtap="saveToCache">Save data to cache</button> 
+<button type="primary" bindtap="jumpToPage">Jump to another page</button> 
 ```
 
 ```javascript
 // index.js
-Page({ 
+Page({
   data: {
-    dataCache: {
-      key: 'Key',
-      data: 'Data'
-    }
-   } 
-   // Set storage 
-   listenerStorageSave: function () {
-     wx.setStorage({
-       key: 'key',
-       data: "I'm storing  data in the cache synchronously",
-       success: function (res) {
-         console.log(res)
-       }
-     })
-   },
-  // Get storage  
-  listenerStorageGet: function() {
+    inputInfo: ''
+  },
+  jumpToPage: function () {
+    wx.navigateTo({
+      url: "../show/show"
+    });
+  },
+  inputEvent: function (e) {
+    console.log(e)
+    console.log(e.detail.value)
+    this.setData({ 
+      inputInfo: e.detail.value 
+    })
+  }, 
+  saveToCache: function () {
+    console.log('ok ok ')
+    wx.setStorage({ key: 'inputInfo', data: this.data.inputInfo,
+     success: function (res) {
+        console.log(res)
+     }
+   })
+  }
+}) 
+```
+
+**`Code snippet "Fetch data from the cache and display data in a new page  (synchronous method)" exemple`**. 
+
+```html 
+<!-- show.wxml -->
+<view>Data you saved to cache:{{inputInfo}}</view>  
+```
+
+```javascript
+// show.js
+Page({
+  data: {
+    inputInfo: ''
+  },
+  onLoad: function (options) {
     var that = this;
     wx.getStorage({
-      key: 'key',
-      success: function(res) {
+      key: 'inputInfo',
+      success: function (res) {
         console.log(res)
         that.setData({
-          dataCache: res.data
+          inputInfo: res.data,
         })
       }
     })
   }
-})
+}) 
 ```
+
 
 
 ### Open the QR code scanner
