@@ -71,14 +71,12 @@ This original piece was written by Le Wagon alumni: [Adrien Pelegri (Batch #30)]
     - [Modal](#modal)
     - [Scroll view](#scroll-view)
 - [Leancloud DB](#leancloud-db)
-    - [Create a form](#create-a-form) 
-    - [Install and initialize Leancloud](#install-and-initialize-leancloud)
-    - [Create an object and encapsulate data](#create-an-object-and-encapsulate-data)
-    - [Persist objects on Leancloud](#persist-objects-on-leancloud) 
-    - [Leancloud dashboard](#leancloud-dashboard)
-    - [Module](#module)
-    - [Fetch data stored on Leancloud](#fetch-data-stored-on-leancloud)
-    - [Recommendations:](#recommendations)
+    - [1. Create a form](#1-create-a-form) 
+    - [2. Install and initialize Leancloud](#2-install-and-initialize-leancloud)
+    - [3. Create an object and encapsulate data](#3-create-an-object-and-encapsulate-data)
+    - [4. Leancloud dashboard](#5-leancloud-dashboard)
+    - [5. Fetch data from Leancloud](#fetch-data-from-leancloud)
+    - [Recommendations](#recommendations)
     - [Production: domain name whitelist](#production-domain-name-whitelist)
 - [WeChat API](#wechat-api)
     - [Get user information](#get-user-information)
@@ -1604,7 +1602,7 @@ Page({
 3.  Display data in the view using the Mustache syntax.
 
 
-### Recommendations:
+### Recommendations
 In this use case we have just seen **how to store data** we collect locally to Leancloud and **how to fetch data stored** from Leancloud. 
 
 We recommend you to read the [Leancloud documentation](https://leancloud.cn/docs/leanstorage_guide-js.html#获取对象 ) or check the LeanTodo mini-program created by Leancloud, [Github repository](https://github.com/leancloud/leantodo-weapp).  
