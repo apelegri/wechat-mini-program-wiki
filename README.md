@@ -823,7 +823,7 @@ The `wx:for` control property binds an array from your logical layer (.js file),
 Page({
   data: {
     array: [{
-      message: 'foo',
+      message: 'foo'
     }, {
       message: 'bar'
     }]
