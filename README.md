@@ -1,4 +1,4 @@
-# WeChat mini-program whitebook
+# WeChat mini-program white paper
 
 ### PREFACE
 China’s top messaging app WeChat rolled out something quite radical: mini-programs. Embedded apps which require no download, no install. Open, use, share, done! 
@@ -8,22 +8,21 @@ There is large debate – *and many clickbaits* – about how practical these ap
 
 Got ideas of services you would like to deploy in WeChat asap? Have basic knowledge of Javascript and want to experiment with this framework? Got lost in the Google translation of the doc? Need a small boost to decrypt what is possible or not? Hello and welcome. 
 
-#### Why this whitebook
-
+#### Why this whitepaper
 Finding your way through the official doc is not easy. In fact, it requires a lot of trial/errors, some research on open-source code and many assumptions to get something done. You have been banging your head on the wall. We get it.
 
 Our mission is to help creative entrepreneurs build great tech products. We will help you take the small steps. 
 
-The whitebook below is not a translation of the documentation and will surely be outdated fast. It is simply our contribution to help any one get started and build a cool WeChat Mini-program fast. **Do it now.**
+The whitepaper below is not a translation of the documentation and will surely be outdated fast. It is simply our contribution to help any one get started and build a cool WeChat Mini-program fast. **Do it now.**
 
 ### Get in touch
-Do [reach out to us](http://lewagon.com/shanghai) if you’d like to share your work and ask for help!
+Are you working on a mini-program? Do [reach out to us](http://lewagon.com/shanghai) if you’d like to share your work, meet our crew, ask for help!
 
-Or if you want to contribute, you can give us a shout on Shanghai@lewagon.com or send a Pull Request [here](https://github.com/apelegri/wechat-miniprogram-whitebook/pulls).
+### Contribute
+If you want to contribute, you can give us a shout on shanghai(at)lewagon.com or send a Pull Request [here](https://github.com/apelegri/wechat-miniprogram-whitebook/pulls).
 
 ### Acknowledgements
-
-This piece was written by [Adrien Pelegri](https://github.com/apelegri) with the support of [Thibault Genaitay](https://github.com/tgenaitay) and [Stephane Delgado](https://github.com/stephanedelgado).
+This original piece was written by Le Wagon alumni: [Adrien Pelegri (Batch #30)](https://github.com/apelegri) with the support of [Thibault Genaitay (Driver China)](https://github.com/tgenaitay) and [Stephane Delgado (Batch #61)](https://github.com/stephanedelgado).
 
 
 ## Summary
@@ -1175,7 +1174,7 @@ To **import outbound** style sheet use `@import` statement followed by the **rel
 @import "outbound.wxss";
 ```
 
-**WeChat recommandation:**  
+**WeChat recommendation:**  
 
 - In development use Iphone 6 device as a standard visual. You may have some glitches on smaller screens.
 
@@ -2017,3 +2016,11 @@ Page({
   } 
 })  
 ```
+
+# Thanks for reading!
+
+### Get in touch
+Are you working on a mini-program? Do [reach out to us](http://lewagon.com/shanghai) if you’d like to share your work, meet our crew, ask for help!
+
+### Contribute
+If you want to contribute, you can give us a shout on shanghai(at)lewagon.com or send a Pull Request [here](https://github.com/apelegri/wechat-miniprogram-whitebook/pulls).
