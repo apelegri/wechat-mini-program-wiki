@@ -1,4 +1,4 @@
-# WeChat mini-program whitebook
+# WeChat Mini-programs Wiki
 
 ### PREFACE
 China’s top messaging app WeChat rolled out something quite radical: mini-programs. Embedded apps which require no download, no install. Open, use, share, done! 
@@ -8,22 +8,21 @@ There is large debate – *and many clickbaits* – about how practical these ap
 
 Got ideas of services you would like to deploy in WeChat asap? Have basic knowledge of Javascript and want to experiment with this framework? Got lost in the Google translation of the doc? Need a small boost to decrypt what is possible or not? Hello and welcome. 
 
-#### Why this whitebook
-
+#### Why this Wiki
 Finding your way through the official doc is not easy. In fact, it requires a lot of trial/errors, some research on open-source code and many assumptions to get something done. You have been banging your head on the wall. We get it.
 
 Our mission is to help creative entrepreneurs build great tech products. We will help you take the small steps. 
 
-The whitebook below is not a translation of the documentation and will surely be outdated fast. It is simply our contribution to help any one get started and build a cool WeChat Mini-program fast. **Do it now.**
+The content below is not a translation of the documentation and will surely be outdated fast. It is simply our contribution to help any one get started and build a cool WeChat Mini-program fast. **Do it now.**
 
 ### Get in touch
-Do [reach out to us](http://lewagon.com/shanghai) if you’d like to share your work and ask for help!
+Are you working on a mini-program? Do [reach out to us](http://lewagon.com/shanghai) if you’d like to share your work, meet our crew, ask for help!
 
-Or if you want to contribute, you can give us a shout on Shanghai@lewagon.com or send a Pull Request [here](https://github.com/apelegri/wechat-miniprogram-whitebook/pulls).
+### Contribute to this Wiki
+If you want to contribute, you can send a Pull Request [here](https://github.com/apelegri/wechat-miniprogram-wiki/pulls) or give us a shout on shanghai(at)lewagon.com for suggestions!
 
 ### Acknowledgements
-
-This piece was written by [Adrien Pelegri](https://github.com/apelegri) with the support of [Thibault Genaitay](https://github.com/tgenaitay) and [Stephane Delgado](https://github.com/stephanedelgado).
+This original piece was written by Le Wagon alumni: [Adrien Pelegri (Batch #30)](https://github.com/apelegri) with the support of [Thibault Genaitay (Driver China)](https://github.com/tgenaitay) and [Stephane Delgado (Batch #61)](https://github.com/stephanedelgado).
 
 
 ## Summary
@@ -88,6 +87,8 @@ This piece was written by [Adrien Pelegri](https://github.com/apelegri) with the
     - [Location-based services](#location-based-services)
     - [Image](#image)
 
+___
+
 ## Registration process
 The registration process is really tough, especially if you don’t have any experience with the fantastic Chinese administrative world. 
 The WeChat verification process will be long. Keep your calm.
@@ -110,6 +111,8 @@ Here is a list of materials you will need to register a mini-program as a compan
 
 We recommend you follow this comprehensive English manual on how to register and create a mini-program project: [Medium article](https://medium.com/@yelin.qiu/a-complete-manual-on-wechat-mini-program-development-8fd28a85ee0d) 
 or check this [official WeChat documentation](https://mp.weixin.qq.com/debug/wxadoc/introduction/index.html?t=201758) (Chinese).
+
+___
 
 ## WeChat IDE
 
@@ -172,6 +175,8 @@ This page is where you will find the current project details as your AppID, dire
 While you are testing your mini-program on your phone, you can enable the debugger tool directly on your device.    
 
 ![project information](assets/project-information.png) 
+
+___
 
 ## Dig into the "quickstart" project
 This section will introduce the structure of the **"quickstart" provided by WeChat** (boilerplate) and the fundamentals you need to comply with this framework.   
@@ -408,6 +413,8 @@ Up to now you catch the fact that you will have **two layers in each page:**
 
 ![App life cycle](assets/logical-view-layer-scheme.png) 
 
+___
+
 ## The life cycle of your MP
 
 We can break-down a mini-program life cycle in two cycles, the application cycle and the page cycle. 
@@ -519,6 +526,8 @@ When the mini-program is running from the background (app life cycle) to the for
 - Do not call `onLaunch` when the `getCurrentPages()` page is not yet generated.
 - By using `getApp()`you can obtain an **instance of App()** but lifecycle functions don’t attempt to call the `App()` functions.  
  
+___
+
 ## Core setup of your MP
 The setup of your mini-program is simple
 and designed  to save time or being frustrated if you have customization needs.   
@@ -758,6 +767,7 @@ Here is the link to the [WeChat documentation](https://mp.weixin.qq.com/debug/wx
 
 Here is a link to the [WeChat documentation](https://mp.weixin.qq.com/debug/wxadoc/dev/framework/config.html).
 
+___
 
 ## Create dynamic pages
   
@@ -1145,7 +1155,7 @@ Page({
 
 **Note:** Both variants are using a `Page()` function which implies that you are sharing the specific page where you declare the function.
 
-
+___
 
 ## WeChat design guidelines 
 WeChat aims to build a friendly, efficient and consistent user experience. To make it happen WeChat official design team provides a [WeUI repository](https://github.com/weui ). This **basic front-end library** enables developers to match the native visual experience.  
@@ -1175,9 +1185,11 @@ To **import outbound** style sheet use `@import` statement followed by the **rel
 @import "outbound.wxss";
 ```
 
-**WeChat recommandation:**  
+**WeChat recommendation:**  
 
 - In development use Iphone 6 device as a standard visual. You may have some glitches on smaller screens.
+
+___
 
 ## Built-in components 
 WeChat framework provides to developers a large set of basic components, the [exhaustive list of components is here](https://mp.weixin.qq.com/debug/wxadoc/dev/component/).
@@ -1355,55 +1367,14 @@ wx.showModal({
 
 ![modal parameters](assets/modal-parameters.png)
 
-
-### Scroll view 
-Scroll views has one main purpose, it lets users drag the area of the content they want to display. Mostly used to **scroll content that will not fit entirely on the screen**.
-Scroll view can  be divided into horizontal and vertical scrolling.  
-
-**`Code snippet  "vertical scroll view" example.`**
-
-
-```html
-<!-- .wxml -->
-<scroll-view scroll-y="true" style="height: 200px;" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
-  <view id="green" class="scroll-view-item bc_green"></view>
-  <view id="red"  class="scroll-view-item bc_red"></view>
-  <view id="yellow" class="scroll-view-item bc_yellow"></view>
-  <view id="blue" class="scroll-view-item bc_blue"></view>
-</scroll-view>
-```
-**Note:** whenever using vertical scroll, you must set the height in WXSS otherwise scroll will not take effect.
- 
-```javascript
-// .js
-Page({
-  data: {
-    toView: 'red',
-    scrollTop: 100
-  },
-  upper: function(e) {
-    console.log(e)
-  },
-  lower: function(e) {
-    console.log(e)
-  },
-  scroll: function(e) {
-    console.log(e)
-  }
-}) 
-```
-
-**Scroll view attributes description:**  
-
- ![navigator attributes description](assets/scroll-view-table.png)  
+___
  
 ## Leancloud DB
 
-This tutorial aims to explain the different **setps you have to follow** if you want to **persist data and fetch data stored**  in a database for your mini-program.
+This section aims to explain the different **steps you have to follow** if you want to **persist your app data and fetch data** on a database. We selected Leancloud.cn for the simplicity of its installation for beginners.
 
-**Let me give you some context first:**  
-The use case below is based on a mini-program that has been developed in a purpose of gathering feedback through a form and persist the data collected  on Leancloud. To make this tutorial more coherent, we decided to add a section on how to fetch and display data stored on Leancloud. To illustrate this second section (fetch data) we created a new page that display all reviews gathered by the form and stored on Leancloud.
-
+**Some context first:**  
+The example below is based on a Mini-program aimed at gathering feedbacks through a simple form. This mini-program persists the data collected on Leancloud.cn. We will explain how to fetch and display data stored on the DB. To illustrate this second section (fetch data) we created a new page that displays all reviews stored on Leancloud.
 
 
 Here is the [Github repository](https://github.com/apelegri/wagonform-wechat-mp) of the project used to create this tutorial. 
@@ -1414,12 +1385,11 @@ Here is the [Github repository](https://github.com/apelegri/wagonform-wechat-mp)
 1. [Create a form](#create-a-form).
 2. [Setup Leancloud](#install-and-initialize-leancloud) in your mini-program.
 3. [Create an object and encapsulate data](#create-an-object-and-encapsulate-data) you want to persist.
-4. [Persist objects on Leancloud](#persist-objects-on-leancloud).
-5. Create your table within [Leancloud dashboard](#leancloud-dashboard).
-6. Create a new review page and a button to redirect users to this review page.
-7. [Fetch data](#fetch-data-stored-on-leancloud) from Leancloud and display reviews.
+4. Create your table within [Leancloud dashboard](#leancloud-dashboard).
+5. Create a new review page and a button to redirect users to this review page.
+6. [Fetch data](#fetch-data-stored-on-leancloud) from Leancloud and display reviews.
 
-### Create a form 
+### 1. Create a form 
 
 **`Code snippet "create a form" example.`**
 
@@ -1461,7 +1431,7 @@ Page({
 **Local storage:**   
 In the `bindFormSubmit` function, we assigned user's inputs to local variables in the purpose of testing if we can collect form's user inputs locally.  
 
-### Install and initialize Leancloud
+### 2. Install and initialize Leancloud
 
 Before we begin the installation, if you are in development  white list your domain name by checking up the last checkbox of the project interface within your [WeChat IDE](#wechat-ide)  . For specific debugging needs you can follow this [Leancloud tutorial](https://leancloud.cn/docs/weapp-domains.html).
 
@@ -1486,12 +1456,12 @@ AV.init({
 
 If you are lost refer to the [Github repository](https://github.com/apelegri/wagonform-wechat-mp) of the project. 
 
-### Create an object and encapsulate data 
+### 3. Create an object and encapsulate data 
 
 In the first place, create a new folder called **model** and **add** a `form.js` file to this folder. Named your file in accordance with the kind of object you want to persist, in this case a **form.** This step is not required but permits to keep your **files organised.** 
 
 **Let's create the object:**  
-In the **form.js** file you just created, require **av-weapp-min.js**  you installed in **util.js** and assigns it to an `AV` constant. Then instantiate the `From` object. 
+In the **form.js** file you just created, require **av-weapp-min.js**  you installed in **util.js** and assigns it to an `AV` constant. Then instantiate the `Form` object. 
  
  **`Code snippet "require Leancloud and create an object" example.`**  
 
@@ -1500,6 +1470,11 @@ In the **form.js** file you just created, require **av-weapp-min.js**  you insta
 const AV = require('../utils/av-weapp-min.js');
 class Form extends AV.Object {
 }
+// Register object
+AV.Object.register(Form, 'Form');
+
+// Export object
+module.exports = Form;
 ``` 
 
 Now that you have instantiated the `Form` object,  **create the  form object** to **encapsulate data**  in the logical layer (here form.js)  and redirect user after the form submission.
@@ -1554,44 +1529,21 @@ bindFormSubmit: function(e) {
 2. We defined a function `setTimeout` that **encapsulate data** in the  new `Form`object and **redirect user** when the form is submitted. 
 
 **Note:** `setACL(acl)` is a Leancloud [built-in property](https://leancloud.cn/docs/leanstorage_guide-js.html#保存对象).
-
-### Persist objects on Leancloud
-
-Now that we have encapsulated data in the object, we have to **persist the object on Leancloud** through the use of a [module](#module). 
-
-**`Code snippet "persist the object on Leancloud" example.`**
-
-```javascript 
-// model/form.js
-const AV = require('../utils/av-weapp-min.js');
-class Form extends AV.Object {
-}
-
-// Register object
-AV.Object.register(Form, 'Form');
-
-// Export object
-module.exports = Form;
-```
  
-### Leancloud dashboard
-So far everything is done within your mini-program, what remains to be done is a **projection** of  the data collected **within your Leancloud dashboard**.
+### 4. Leancloud dashboard
+So far everything is done within your mini-program, what remains to be done is a **projection** of the data collected **within your Leancloud dashboard**.
 
 - **Create a project** in your Leancloud dashboard.
 - **Create a table** in this project by adding the class object you created, such as a `Form` class in this exemple.  
 - **Add columns** to your table (be cautionous on the data type you specify when you add your columns). 
 
-**Test it** to be sure that the data collected, is persisted within your Leancloud dashboard.
+**Test it** to be sure that the data collected is persisted within your Leancloud dashboard.
 
-### Module
+### 5. Fetch data from Leancloud 
 
-In Javascript a [module](https://medium.freecodecamp.com/javascript-modules-a-beginner-s-guide-783f7d7a5fcc) refers to a small units of independent, reusable code. It is interpreted as **moving all related functions** into a file. `exports` is an object that will be **exposed as a module.** So whatever you assign to a `module.exports`, it will be exposed as a module.  In this case `module.exports` send the `Form` object  to Leancloud.
+First let me remind you the background of this section. We want to **display in a new page the list of reviews** we have **collected and persisted on Leancloud**. I assume that you have followed the first section of the tutorial, [(if you missed it see above)](#leancloud-db).
 
-### Fetch data stored on Leancloud 
-
-First let me remind you the background of this section. We want to **display in a new page the list of reviews** we have **collected and persisted on Leancloud** through the form we have created above. I assume that you have followed the first section of the tutorial, [(if you missed it see above)](#leancloud-db).
-
-**Sepcs:**
+**Specs:**
 
 - Create a new page called `review`.
 - Fetch data from Leancloud and display all reviews stored. 
@@ -1600,7 +1552,7 @@ So let's create a new review page and a button that **redirects to review page**
  (**tip:** just add the route path to your **app.json**, the framework will create the new page folder and files by itself). 
 
 ```html
-<!-- index.html -->
+<!-- index.wxml -->
 <!-- CTA redirects to review page -->
 <view class="cta-margin">
  <navigator url="/pages/review/review" class="btn-index">Reviews</navigator>
@@ -1633,7 +1585,7 @@ const Form = require('../../model/form.js');
 // Fetch data from Leancloud
 Page({
   data: {
-    forms: []
+    forms: {}
   },
   onReady: function() {
     new AV.Query('Form')
@@ -1655,12 +1607,13 @@ Page({
 ### Recommendations:
 In this use case we have just seen **how to store data** we collect locally to Leancloud and **how to fetch data stored** from Leancloud. 
 
-I recommend that you read [Leancloud documentation](https://leancloud.cn/docs/leanstorage_guide-js.html#获取对象 ) or check LeanTodo mini-program created by Leancloud, [Github repository](https://github.com/leancloud/leantodo-weapp)  and dig in facilities Leancloud offers.  
+We recommend you to read the [Leancloud documentation](https://leancloud.cn/docs/leanstorage_guide-js.html#获取对象 ) or check the LeanTodo mini-program created by Leancloud, [Github repository](https://github.com/leancloud/leantodo-weapp).  
 
 ### Production: domain name whitelist
 
 When you are in production you have to **configure Leancloud domain name** within WeChat platform. [Follow this leancloud tutorial](https://leancloud.cn/docs/weapp-domains.html).  
 
+___
 
 ## WeChat API 
 
@@ -2017,3 +1970,13 @@ Page({
   } 
 })  
 ```
+
+___
+
+# Thanks for reading!
+
+### Get in touch
+Are you working on a mini-program? Do [reach out to us](http://lewagon.com/shanghai) if you’d like to share your work, meet our crew, ask for help!
+
+### Contribute to this Wiki
+If you want to contribute, you can send a Pull Request [here](https://github.com/apelegri/wechat-miniprogram-whitebook/pulls) or give us a shout on shanghai(at)lewagon.com for suggestions!
