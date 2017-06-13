@@ -173,6 +173,10 @@ While you are testing your mini-program on your phone, you can enable the debugg
 
 ![project information](assets/project-information.png) 
 
+**New project creation:**
+
+![project creation modal](assets/project-creation-modal.png) 
+
 ___
 
 ## Dig into the "quickstart" project
@@ -1759,14 +1763,12 @@ Page({
     });
   },
   inputEvent: function (e) {
-    console.log(e)
     console.log(e.detail.value)
     this.setData({ 
       inputInfo: e.detail.value 
     })
   }, 
   saveToCache: function () {
-    console.log('ok ok ')
     wx.setStorage({ key: 'inputInfo', data: this.data.inputInfo,
      success: function (res) {
         console.log(res)
