@@ -48,7 +48,7 @@ This original piece was written by Le Wagon alumni: [Adrien Pelegri (Batch #30)]
 - [Create dynamic pages](#create-dynamic-pages)
     - [WXML - HTML, what's the deal?](#wxml---html-whats-the-deal)
     - [Data binding](#data-binding)
-    - [List rendering: wx:for](#list-rendering-wxfor)
+    - [List loop rendering: wx:for](#list-loop-rendering-wxfor)
     - [Conditional rendering: wx:if, wx:elif, wx:else](#conditional-rendering-wxif-wxelif-wxelse)
     - [Template](#template)
     	- [Import a template](#import-a-template)
@@ -83,6 +83,7 @@ This original piece was written by Le Wagon alumni: [Adrien Pelegri (Batch #30)]
     - [Open the QR code scanner](#open-the-qr-code-scanner)
     - [Location-based services](#location-based-services)
     - [Image](#image)
+- [FAQ](#faq)
 
 ___
 
@@ -782,6 +783,12 @@ The WeChat event system behaves like classic Javascript events which **handle lo
   
  ![wxml and html differences](assets/wxml-html.png)  
  
+ **Further explanations about `<block>`**:  
+ 
+`<block>` is **not a component**, it is only a **packaging element**, it will not do any rendering in the page and **only accept control properties**.
+
+
+   
  **Note:** All components and attributes are lowercase.
   
 ### Data binding
@@ -818,7 +825,7 @@ Data binding uses [Mustache syntax](https://mustache.github.io/mustache.5.html) 
 
 WeChat offers lot of possibilities regarding [data binding usage](https://mp.weixin.qq.com/debug/wxadoc/dev/framework/view/wxml/data.html ). You have the oportunity to use data binding on component attributes, properties, string operations, arithmetic operations, data path and array.
 
-### List rendering: wx:for
+### List loop rendering: wx:for
 The `wx:for` control property binds an array from your logical layer (.js file), loops through it and assigns the data. 
 
  **`Code snippet "wx:for" example.`**
@@ -843,6 +850,7 @@ Page({
 ```
 
 Similar to `view wx:for` you can use **`block wx:for`** to render **multiple lines** block. (See [block](#wxml---html-whats-the-deal) in the WXML table above).
+
 
 **`Code snippet "block wx:for" example.`**
 
@@ -1433,12 +1441,7 @@ Page({
   bindFormSubmit: function(e) {
     // Local storage
     var review = e.detail.value.review
-    var recommendation = e.detail.value.recommendation
-    var learntocode = e.detail.value.learntocode
-    var hearAbout = e.detail.value.hearAbout
-    var nickName = e.detail.value.nickName
-    var email = e.detail.value.email
-    var phone = e.detail.value.phone  
+    // ... 
   } 
 })
 ```
@@ -1505,12 +1508,7 @@ bindFormSubmit: function(e) {
    // Local storage
    console.log(e)
    var review = e.detail.value.review
-   var recommendation = e.detail.value.recommendation
-   var learntocode = e.detail.value.learntocode
-   var heardAbout = e.detail.value.heardAbout
-   var nickName = e.detail.value.nickName
-   var email = e.detail.value.email
-   var phone = e.detail.value.phone
+  // ...
    
    // Leancloud permissions
    var acl = new AV.ACL();
@@ -1520,13 +1518,8 @@ bindFormSubmit: function(e) {
    // Leancloud storage
    setTimeout(function(){
      new Form({
-       name: nickName,
-       email: email,
-       phone: phone,
-       review: review,
-       recommendation: recommendation,
-       learn_to_code: learntocode,
-       heard_about: heardAbout
+       review: review
+       // ...
      }).setACL(acl).save().catch(console.error);
     
     // Redirect user
@@ -2009,7 +2002,43 @@ Page({
 
 ___
 
-# Thanks for reading!
+
+## FAQ
+
+All along our mini-programs creation path we encountered issues and questions, we want to share with you. If you had some issues you want to share,  [reach out us](#contribute-to-this-wiki).
+
+### API, you can use
+
+WeChat **allows only** API that have an [ICP license](https://en.wikipedia.org/wiki/ICP_license), so you can forget about most of the APIs you are familiar with in western countries.
+
+Here is a directory of APIs available in China, [check it out](https://www.programmableweb.com/category/chinese).
+
+### CSS, can't use `background-image:` property
+
+Image ressources **cannot be obtained** through the **CSS** `background-image:  url(../../images/banner.png);`. I know it is dreadful, but we have to deal with it. 
+
+
+There are **two ways to bypass** this frustration:
+
+- You can use the CSS `background-image: ` but you **can't use a realtive path**, you have to encode your image in [base64](https://stackoverflow.com/questions/201479/what-is-base-64-encoding-used-for) and then pass it to to the **`background-image:  url(base64 image);`**. Here is a tool to [encode images in base64](https://www.base64-image.de/). 
+
+- Or you can use the `<image>` tag and treat images with `<image>` tag attribute like **`mode`**. WeChat has **13 modes**, 9 are **cutting mode** and 4 are **zoom mode**. Here is a link to the [documenation](https://mp.weixin.qq.com/debug/wxadoc/dev/component/image.html).
+
+### RPX as unit? 
+
+ RPX stands for **responsive pixel**  which is the unit of WeChat mini-programs. According to the official definition, **`rpx` is based on the adaptive screen width.** 
+
+In fact RPX unit is based on the `rem` unit which stands for **"root em"**. **Why not `em` unit?**
+ 
+The `em` unit is **relative** to the font-size of the **parent**, which causes the **compounding issue**. The `rem` unit is relative to the root (or the html) element which is a good choice to tackle the compounding issue (font sizing duty).
+
+In effect, rem is a document-wide CSS variable. It’s a **common used for mobile and tablet** devices, they handle it much better than browser.
+
+However, to come back to `rpx` units, rpx is adapting on the width screen which makes the experience more responsive.
+
+___
+
+## Thanks for reading!
 
 ### Get in touch
 Are you working on a mini-program? Do [reach out to us](http://lewagon.com/shanghai) if you’d like to share your work, meet our crew, ask for help!
