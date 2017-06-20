@@ -61,8 +61,10 @@ This original piece was written by Le Wagon alumni: [Adrien Pelegri (Batch #30)]
     	- [Enable the forward button of the drop-down menu](#enable-the-forward-button-of-the-drop-down-menu)
     	- [Create a forward button within the current page](#create-a-forward-button-within-the-current-page)
 - [WeChat design guidelines](#wechat-design-guidelines)
+    -  [WeUI, basic front-end library ](#weui-basic-front-end-library)
     - [WXSS](#wxss)
     - [Style import](#style-import)
+    - [Selectors supported](#selectors-supported)
 - [Built-in components](#built-in-components)
     - [Navigator](#navigator)
     - [Picker](#picker)
@@ -1181,10 +1183,45 @@ Page({
 ___
 
 ## WeChat design guidelines 
-WeChat aims to build a friendly, efficient and consistent user experience. To make it happen WeChat official design team provides a [WeUI repository](https://github.com/weui ). This **basic front-end library** enables developers to match the native visual experience.  
-  
-For more details regarding **WeChat design guidelines** you can find [here the full documentation](https://mp.weixin.qq.com/debug/wxadoc/design/#友好礼貌).
+
+### WeUI, basic front-end library 
  
+WeChat aims to build a **friendly**, **efficient** and **consistent** user experience. To make it happen WeChat official design team provides a [WeUI repository](https://github.com/weui ). This **basic front-end library** (WeUI) is a basic style library consistent with WeChat native visual experience. WeUI design library, can be understand as WeChat front-end library, **similar to Bootstrap**. It includes a **large set of components** as button, cell, dialog, progress, toast, article, actionsheet, icon and more.
+  
+**Usefull Github repositories:**
+  
+- WeUI offcial demo website, WXSS: https://weui.io/
+- WeUI WXSS library: https://github.com/weui/weui-wxss 
+- WeUI Sketch and Photoshop files: https://github.com/weui/weui-design  
+
+
+**Download WeUI** repository locally through the `npm`:
+
+`npm install weui-wxss`
+
+The downloaded code contains **WeUI source code** and a mini-program sample based on WeUI. 
+
+![Components path](assets/components-path.png)
+
+**Let's open WeUI mini-program sample in WeChat IDE:**
+
+![Weui mini-program](assets/weui-mp.png)
+
+![Weui mini-program](assets/weui-mini-program.png)
+
+**Import WeUI** style in your  **app.wxss** to enable the use of **WeUI style in your mini-program:**
+
+```css
+@import "style/weui.wxss";
+```
+
+![WeUI import](assets/import-weui.png)
+
+
+ For more details regarding **WeChat design guidelines** you can find [here the full documentation](https://mp.weixin.qq.com/debug/wxadoc/design/#友好礼貌).
+ 
+
+
 ### WXSS
  
 WXSS has almost all of the features CSS has. 
@@ -1193,6 +1230,7 @@ The style sheet defined in **app.wxss** is the common style rules identified on 
   
 -	Size unit 
 -	Style import
+-  	Selectors supported
 
 #### Size unit
 WXSS is using `rpx` (responsive pixel) as unit. It allows to adjust pixels according to the width of the screen.  You may continue to use the classic `px` unit (just not the WeChat way of doing things). 
@@ -1207,6 +1245,14 @@ To **import outbound** style sheet use `@import` statement followed by the **rel
 /* app.wxss*/ 
 @import "outbound.wxss";
 ```
+
+#### Selectors supported
+
+WeChat framework cannot support lot of standard **CSS** selectors, such as cascading selector.
+
+**Supported selectors:**
+
+ ![WXSS selectors](assets/selectors-wxss.png)  
 
 **WeChat recommendation:**  
 
@@ -1231,7 +1277,6 @@ WeChat framework provides to developers a large set of basic components, the [ex
   <navigator url="/pages/index/index" open-type="switchTab" hover-class="other-navigator-hover">tab switching</navigator>
 </view>
 ```   
-
 
  **Navigator attributes description:**  
 
