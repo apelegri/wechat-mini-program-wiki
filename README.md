@@ -71,6 +71,7 @@ This original piece was written by Le Wagon alumni: [Adrien Pelegri (Batch #30)]
     - [Switch](#switch)
     - [Toast](#toast)
     - [Modal](#modal)
+    - [Map](#map)
 - [Leancloud DB](#leancloud-db)
     - [1. Create a form](#1-create-a-form) 
     - [2. Install and initialize Leancloud](#2-install-and-initialize-leancloud)
@@ -1221,7 +1222,6 @@ The downloaded code contains **WeUI source code** and a mini-program sample base
  For more details regarding **WeChat design guidelines** you can find [here the full documentation](https://mp.weixin.qq.com/debug/wxadoc/design/#友好礼貌).
  
 
-
 ### WXSS
  
 WXSS has almost all of the features CSS has. 
@@ -1429,11 +1429,32 @@ wx.showModal({
  })
 ```
 
-
-
 **Modal parameters:**
 
 ![modal parameters](assets/modal-parameters.png)
+
+### Map 
+
+The `map` component is a native component, it has a long list of attributes, we will go through the major ones. Here is the link to [WeChat documenation](https://mp.weixin.qq.com/debug/wxadoc/dev/component/map.html) for more details.
+
+**`map` attribute list:**
+
+ ![map attributes](assets/map.png)
+
+ **`Code snippet "map component" example.`**
+
+```html
+<map id="map" longitude="113.324520" latitude="23.099994" scale="14" controls="{{controls}}" bindcontroltap="controltap" markers="{{markers}}" bindmarkertap="markertap" polyline="{{polyline}}" bindregionchange="regionchange" show-location style="width: 100%; height: 300px;"></map>
+```
+
+Refer to the [Location-based services](#location-based-services) part of the wiki if you want to have a look on location-based services WeChat is offering through the API.
+
+
+**WeChat recommendations:**
+
+- Do not use scroll-view on map component.
+- CSS animation on the map component is invalid.
+- `wx.getLocation` need to specify `type` as `gcj02`
 
 ___
  
@@ -1444,9 +1465,7 @@ This section aims to explain the different **steps you have to follow** if you w
 **Some context first:**  
 The example below is based on a Mini-program aimed at gathering feedbacks through a simple form. This mini-program persists the data collected on Leancloud.cn. We will explain how to fetch and display data stored on the DB. To illustrate this second section (fetch data) we created a new page that displays all reviews stored on Leancloud.
 
-
 Here is the [Github repository](https://github.com/apelegri/wagonform-wechat-mp) of the project used to create this tutorial. 
-
 
 **Specs:**
   
@@ -1879,9 +1898,7 @@ WeChat API provides a full set of location-based services:
 - **`wx.openLocation`** to display location on their **buit-in map view**. 
 - **`wx.createMapContext`** to personalize your map.
 
-
 **`Code snippet "get location" example.`**
-
 ```html
 <!-- .wxml --> 
 <button type="primary" bindtap="listenerBtnGetLocation">Get location</button>
@@ -2075,11 +2092,13 @@ There are **two ways to bypass** this frustration:
 
 In fact RPX unit is based on the `rem` unit which stands for **"root em"**. **Why not `em` unit?**
  
-The `em` unit is **relative** to the font-size of the **parent**, which causes the **compounding issue**. The `rem` unit is relative to the root (or the html) element which is a good choice to tackle the compounding issue (font sizing duty).
+The `em` unit is **relative** to the font-size of the **parent**, which causes **compounding issue**. The `rem` unit is relative to the root element which conteracts the compounding issue (font sizing duty).
 
-In effect, rem is a document-wide CSS variable. It’s a **common used for mobile and tablet** devices, they handle it much better than browser.
+However, to come back to `rpx` unit, **rpx advantages** are:
 
-However, to come back to `rpx` units, rpx is adapting on the width screen which makes the experience more responsive.
+- It scales according to the width of the ratio (screen width) which makes the experience more responsive. 
+- It facilitates the realization of high-definition, 1 pixel line.
+- Well suported on mobile and tablet devices.
 
 ___
 
