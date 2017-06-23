@@ -1690,9 +1690,24 @@ ___
 ## WeChat API 
 
 ### Get user information
+
+ All **user information** you **have access on** through `wx.getUserInfo`:
+ 
+```javascript
+wx.getUserInfo({
+  success: function(res) {
+    var userInfo = res.userInfo
+    var nickName = userInfo.nickName
+    var avatarUrl = userInfo.avatarUrl
+    var gender = userInfo.gender //sex => 0: unknown ; 1: male ; 2：female
+    var province = userInfo.province
+    var city = userInfo.city
+    var country = userInfo.country
+  }
+}) 
+```
 WeChat "quickstart" (WeChat boilerplate) gives you a `getUserInfo` function in the **app.js** file. As the name suggests, this function is meant to **obtain user information**. Let’s go through this function step by step.
 
- 
 **General description:**  
 
 1. `getUserInfo` function has a parameter **cb**, which is also a function.
