@@ -29,6 +29,9 @@ This original piece was written by Le Wagon alumni: [Adrien Pelegri (Batch #30)]
 
 - [Registration process](#registration-process)
 - [WeChat IDE](#wechat-ide)
+  - [What's this?](whats-this)
+  - [Quick tutorial](#quick-tutorial)
+  - [Project creation](#project-creation)
 - [Dig into the "quickstart" project](#dig-into-the-quickstart-project)
   - [Root directory](#root-directory)
   - [Quickstart project pages](#quickstart-project-pages)
@@ -42,7 +45,7 @@ This original piece was written by Le Wagon alumni: [Adrien Pelegri (Batch #30)]
     - [TabBar](#tabbar)
     - [Window](#window)
     	- [Enable pull down refresh](#enble-pull-down-refresh)
-    	- [Dynamic navbar title](#dynamic-navbar-title)
+    	- [Navbar, dynamic title](#navbar-dynamic-title)
     - [Network timeout](#network-timeout)
     - [Debug](#debug)
 - [Create dynamic pages](#create-dynamic-pages)
@@ -117,14 +120,15 @@ ___
 
 ## WeChat IDE
 
-**What's this?**  
+#### What's this?  
 An [IDE](https://mp.weixin.qq.com/debug/wxadoc/introduction/index.html?t=201758) (integrated development environment)  is a set of programming tools for writing an application. It consists of a code editor, a compiler and a debugger, accessible through a single graphical user interface. 
  
 Download the WeChat IDE here: 
  [Mac](https://servicewechat.com/wxa-dev-logic/download_redirect?type=darwin&from=mpwiki), [Windows 64](https://servicewechat.com/wxa-dev-logic/download_redirect?type=darwin&from=mpwiki), [Windows 32](https://servicewechat.com/wxa-dev-logic/download_redirect?type=ia32&from=mpwiki)
  
+#### Quick tutorial
 
-**Quick tutorial to master the WeChat IDE**  
+Here is a quick tutorial to master the WeChat IDE and take the most from it.  
 
 A **Code editor** with the tree of your files on the side and a **Simulator** on the left, which displays the preview of your app.
 ![IDE Wechat home](assets/code-editor.png)
@@ -177,7 +181,7 @@ While you are testing your mini-program on your phone, you can enable the debugg
 
 ![project information](assets/project-information.png) 
 
-**New project creation:**
+#### Project creation
 
 ![project creation modal](assets/project-creation-modal.png) 
 
@@ -735,7 +739,7 @@ The window item is used to set mini-program title and common window style.
 }}
 ``` 
  
-#### Dynamic navbar title
+####  Navbar dynamic title
 
 WeChat offers the possibility to **change the title** of the top **navigation bar** within each page.
 
@@ -1187,7 +1191,7 @@ ___
 
 ### WeUI, basic front-end library 
  
-WeChat aims to build a **friendly**, **efficient** and **consistent** user experience. To make it happen WeChat official design team provides a [WeUI repository](https://github.com/weui ). This **basic front-end library** (WeUI) is a basic style library consistent with WeChat native visual experience. WeUI design library, can be understand as WeChat front-end library, **similar to Bootstrap**. It includes a **large set of components** as button, cell, dialog, progress, toast, article, actionsheet, icon and more.
+WeChat aims to build a **friendly**, **efficient** and **consistent** user experience. To make it happen WeChat official design team provides a [WeUI repository](https://github.com/weui ). This **basic front-end library** (WeUI) is consistent with WeChat native visual experience. WeUI, can be understand as WeChat front-end library, **similar to Bootstrap**. It includes a **large set of components** as button, cell, dialog, progress, toast, article, actionsheet, icon and more.
   
 **Usefull Github repositories:**
   
