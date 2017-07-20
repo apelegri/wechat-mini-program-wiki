@@ -2088,6 +2088,9 @@ WeChat network api offers common HTTPS requests, WebSocket, upload and download 
 - **`wx.uploadFile`** to preview the image before the upload on the app.
 - **`wx.downloadFile`** to get image information (height, width, path, src).
 
+#### Request attributes:
+ ![App affects page ](assets/http-request-table.png)  
+
 In the example below we have one function and one event handler: `addNewPost` and `onPullDownRefresh` respectively, as their name states, you should be able to add a new post and get posts using a `wx.request` call.
 
 **`Code snippet "making a POST HTTPS request" example.`**
