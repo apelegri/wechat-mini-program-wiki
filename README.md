@@ -145,13 +145,13 @@ Here is a complete list of buttons to perform tasks when you are in development:
 ![compilator settings](assets/compilator-modal.png)
 
 **6.  Scene value**  
-**7.	Cache**    
-**8.	Shut down:**  Quit the project you are on and move toward another one.   
-**9.	Hide the simulator**  
+**7.  Cache**    
+**8.  Shut down:**  Quit the project you are on and move toward another one.   
+**9.  Hide the simulator**  
 **10. Devices:** It gives a list of devices to test mini-program responsivness.  
-**11.	 You can work on:** wifi, 4G, 3G, 2G.  
-**12. Hide arborescence**  
-**13. Manage your files:**  Search, add and delete a folder or a file.
+**11.  You can work on:** wifi, 4G, 3G, 2G.  
+**12.  Hide arborescence**  
+**13.  Manage your files:**  Search, add and delete a folder or a file.
 
 
 **Debugger / Inspector:**  
@@ -160,7 +160,7 @@ This tool is an important part of the IDE, it looks like the good old *Chrome De
 
  **1. Top bar** 
 ​      
- **Network:** This panel is to debug request and socket issues or page load performance.  
+**Network:** This panel is to debug request and socket issues or page load performance.  
 **Storage:** allows to access all the data you have in your cache.  
 **AppData:** is used to display the current project data. You can directly edit the data in the panel and preview it.   
 **Wxml:** let you inspect and edit on the fly every elements of your page.  
@@ -279,7 +279,7 @@ App({
   }
 }
 ```
-**Note:** you cannot add any comment in the **app.json**.
+**Note:** Comments are not allowed in the **app.json** file.
 
 **app.wxss** is the global style sheet of the mini-program. You should declare common style rules here.
 ​    
@@ -409,8 +409,9 @@ module.exports = {
   formatTime: formatTime
 }
 ```
-**Note:**  
-The Utils folder is used to **import libraries** and require them when you need it. In the code snippet above **util.js** file creates a `formatTime` function to display the date of your logs properly.  You may recall the require of **util.js** in **logs.js** file.
+**Note:**
+In Utils are stored **imported libraries** that you may require elsewhere (in our example, util.js is required in log.js). In the code snippet above, the `formatTime` function is defined in **util.js** to properly display the date of your logs.
+
 
 ### Take-away from the "quickstart" project
 Up to now you catch the fact that you will have **two layers in each page:**
@@ -426,11 +427,11 @@ ___
 ## The life cycle of your MP
 
 We can break-down a mini-program life cycle in two cycles, the application cycle and the page cycle. 
-The **`App()`** life cycle is the **start and end point** of the mini-program whereas **`Page()`** life cycle is activated when users browse through the mini-program.
+The **`App()`** life cycle is the **start & end point** of the mini-program whereas **`Page()`** life cycle is activated when users browse through the mini-program.
 
 ### Application life cycle 
 
-`App()` function is used to register a mini-program. It accepts an object as a parameter which specifies life cycle functions of a MP.    
+`App()` function is used to register a mini-program. It takes an object as parameter which specifies the life cycle functions of a MP.    
 
 ![App life cycle](assets/app-lifecylce.png)  
 
@@ -438,7 +439,7 @@ The **`App()`** life cycle is the **start and end point** of the mini-program wh
 
 1. A user opens the mini-program which triggers **`onLaunch`** function and initialize the MP. 
 2. When the initialization is completed, the **`onShow`** function is triggered. 
-3. The **`onHide`** function is triggered when the current user quit the mini-program.   
+3. The **`onHide`** function is triggered when the current user exits the mini-program.   
 
 
 
@@ -483,9 +484,9 @@ console.log(appInstance.globalData) // I am global data
  **Comments:**  
 
 1. After page registration, the framework calls the **`onLoad`** function.
-2. When a page load, it calls the **`onShow`** function.
+2. When a page loads, it calls the **`onShow`** function.
 3. The first time the page is displayed, **`onShow`** function calls **`onReady`** to render the view.
-4. When it is not the first time, **`onShow`** function directly  renders a view.
+4. On subsequent times, **`onShow`** function directly renders a view.
 5. The **`onHide`** is triggered when the mini-program jumps to another page. 
 6. **`onUnload`** function is called when you quit a page by using `wx.redirectTo()`and  `wx.navigateBack()`. Or when the current page is relaunched, `wx.reLaunch`.
 
@@ -537,8 +538,7 @@ When the mini-program is running from the background (app life cycle) to the for
 ___
 
 ## Core setup of your MP
-The setup of your mini-program is simple
-and designed  to save time or being frustrated if you have customization needs.   
+The setup of your mini-program is simple and designed to save you time and frustration when having customization needs.   
 
 WeChat divides the **app.json configuration** in five parts:  
 
@@ -591,7 +591,7 @@ In this part we will **break-down** this complete **app.json setup** exemple.
 
 ### Routing
 
-`pages` role in **app.json** is to **define all routes**  of your mini-program. This item configuration is of course **required** and it **accepts an array of strings**. Every sub-folders and files within the parent pages folder correspond to the **routing path**.  
+`pages` role in **app.json** is to **define all routes**  of your mini-program. This item's configuration is **mandatory** and it **takes an array of strings**. Each sub-folder and files within the parent pages folder corresponds to a **routing path**.  
 
 **`Code snippet  of  the "app.json" file. `**  
 
@@ -606,7 +606,7 @@ In this part we will **break-down** this complete **app.json setup** exemple.
 ```
 
 **Tip:**  
-Each time you **add a route path** to `"pages"`, the IDE will **automatically create** the folder and files that corresponds to the path  you just created. 
+Each time you **add a route path** to `"pages"`, the IDE will **automatically create** the folder and files that corresponds to the path you just created. 
 
 
 **The WeChat framework brings several routing logics:**   
@@ -652,7 +652,7 @@ This function is used to **get the instance of the current page stack.** It is g
 
 ### TabBar
 
-`tabBar`  item as a name suggets is to configure mini-program top or bottom tab bar. **`tabBar` is an array** which can configure a minimum of 2 tabs and a **maximum of 5 tabs.**
+`tabBar` as the name suggests, is the item which configures the top or bottom tab bar. **`tabBar` is an array** which accomodates a minimum of 2 and **a maximum of 5 tabs.**
 
  **`Code snippet  of the "app.json" file.`**
 
@@ -747,14 +747,14 @@ WeChat offers the possibility to **change the title** of the top **navigation ba
 ```javascript
 // .js
 Page({
-  // Loading spinner when page load
+  // Loading spinner when page loads
   onload: function (){
    wx.showNavigationBarLoading()
   },
-  // Change naviagtion bar title
+  // Change navigation bar title
   onShow: function () {
    wx.setNavigationBarTitle({
-    title: 'Change navabar title',
+    title: 'My new navabar title',
     success: function(res){
       console.log(res)
     }
@@ -803,7 +803,7 @@ The Mini-program framework does not allow developers to use the DOM to control y
 
  ![wxml and html differences](assets/data-binding.png)  
 
-In order to comply with WeChat requirements the `data` attribute has to be initialized **as a JSON format** within `Page()` function. **Data binding** technique allows to **update data dynamically** within the view layer.  
+In order to comply with WeChat requirements the `data` attribute has to be initialized **in JSON format** within `Page()` function. **Data binding** technique allows to **update data dynamically** within the view layer.  
 
 A good practice is to initialize `data` at the top of the `Page()` function.  
 
@@ -824,17 +824,17 @@ Page({
   }
 }
 ```
-As you seen above the dynamic `data:` we want to pass to the view layer correspond to the data attribute from `Page()` function. 
+The dynamic `data:` which is passed over to the view layer is taken from the data attributes in the corresponding `Page()` function.
 
 **Data binding syntax:**  
-Data binding uses [Mustache syntax](https://mustache.github.io/mustache.5.html) (double braces) to **wrap variables.** This syntax is a logic less template engine analysis. In short it is very convenient and easy to use.  
+Data binding uses [Mustache syntax](https://mustache.github.io/mustache.5.html) (double braces) to **wrap variables.** This syntax is a logic less template engine analysis. In short, it is very convenient and easy to use!  
 
 WeChat offers lot of possibilities regarding [data binding usage](https://mp.weixin.qq.com/debug/wxadoc/dev/framework/view/wxml/data.html ). You have the oportunity to use data binding on component attributes, properties, string operations, arithmetic operations, data path and array.
 
 ### List loop rendering: wx:for
 The `wx:for` control property binds an array from your logical layer (.js file), loops through it and assigns the data. 
 
- **`Code snippet "wx:for" example.`**
+**`Code snippet "wx:for" example.`**
 
 ```html
 <!-- .wxml -->
@@ -855,7 +855,7 @@ Page({
 })
 ```
 
-Similar to `view wx:for` you can use **`block wx:for`** to render **multiple lines** block. (See [block](#wxml---html-whats-the-deal) in the WXML table above).
+Similar to `<view wx:for>` you can use **`<block wx:for>`** to render **multiple lines** block. (See [block](#wxml---html-whats-the-deal) in the WXML table above).
 
 
 **`Code snippet "block wx:for" example.`**
@@ -878,7 +878,7 @@ For more details on the code above see this [Github repository](https://github.c
 
 ### Conditional rendering: wx:if, wx:elif, wx:else 
 
-Similar to `wx:for`, **`wx:if`** is used to define a condition statement and to determine if the block should be rendered or not.  
+Similar to `wx:for`, **`wx:if`** is used to define a conditional statement and determine whether the block should be rendered or not.  
 
 **`Code snippet "wx:if" example.`**
 
@@ -898,7 +898,7 @@ Page({
   }
 })
 ```
-If you want to display **more than one tag** within your **conditional statement block** you can use **`block wx:if`**.
+If you want to display **more than one tag** within your **conditional statement block** you can use **`<block wx:if>`**.
 
 ```html
 <!-- .wxml -->
@@ -952,7 +952,7 @@ Page({
 
 #### Import a template 
 
-To declare a template already defined in a new file you first have to import the template.
+To declare a template already defined in a new file you first need to import it.
 
 **`Code snippet "define a template in a specific file" exemple`**
 
@@ -1061,8 +1061,8 @@ Page({
 The two common binding events used are `bind+event_type` and `catch+event_type`. The **catch event** is the one that prevent against bubbling events.  
 
 **Bubbling event concept:**   
-For none javascript person, **bubbling event**, can be defined when an event occurs in **an element nested in another element.** Both elements the parent node and the nested element are **register as a handler** for that particluar event.
-To prevent **against  bubbling events**, the parent node of the nested element should use `catch+event_type`, it will **counteract the bubbling event effect.**
+For non-javascript folks, **bubbling event** can be defined when an event occurs in **an element nested in another element.** Both the parent node and the nested elements are **registered as event handler** for that particular event.
+The parent node of the nested element should use `catch+event_type`, which will **prevent the event from bubbling to ancestor elements.**
 
 **`Code snippet  "counteract bubbling effect with catchtap" example.`**
 
@@ -1745,7 +1745,7 @@ App({
 ```
 **First case, `userInfo` form `globalData`  is not null**
 
-The if condition statement aims to determine if **cb argument** passed to get `getUserInfo` is a function type and if it is a funcion it will pass `userInfo`.
+The if condition statement aims to determine if **cb argument** passed to get `getUserInfo` is a function type and if it is, it will pass `userInfo`.
 
 **How do they figure out if cb parameter is a function?**
 
