@@ -24,6 +24,11 @@ If you want to contribute, you can send a Pull Request [here](https://github.com
 ### Acknowledgements
 This original piece was written by Le Wagon alumni: [Adrien Pelegri (Batch #30)](https://github.com/apelegri) with the support of [Thibault Genaitay (Driver China)](https://github.com/tgenaitay) and [Stephane Delgado (Batch #61)](https://github.com/stephanedelgado).
 
+### Contributors
+
+- [Nathan Lee](https://github.com/kwnath)
+- [Stephane Delgado](https://github.com/stephanedelgado)
+
 
 ## Summary
 
