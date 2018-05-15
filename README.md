@@ -119,7 +119,7 @@ Here is a list of materials you will need to register a mini-program as a compan
 * Fill in the official letter Tencent provides, sign it (by the admin) and stamp it with the enterprise stamp. Upload it.
 
 We recommend you follow this comprehensive English manual on how to register and create a mini-program project: [Medium article](https://medium.com/@yelin.qiu/a-complete-manual-on-wechat-mini-program-development-8fd28a85ee0d)
-or check this [official WeChat documentation](https://mp.weixin.qq.com/debug/wxadoc/introduction/index.html?t=201758) (Chinese).
+or check this [official WeChat documentation](http://admin.wechat.com/wiki) (Currently in Beta).
 
 ___
 
