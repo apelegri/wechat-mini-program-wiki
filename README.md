@@ -119,7 +119,7 @@ Here is a list of materials you will need to register a mini-program as a compan
 * Fill in the official letter Tencent provides, sign it (by the admin) and stamp it with the enterprise stamp. Upload it.
 
 We recommend you follow this comprehensive English manual on how to register and create a mini-program project: [Medium article](https://medium.com/@yelin.qiu/a-complete-manual-on-wechat-mini-program-development-8fd28a85ee0d)
-or check this [official WeChat documentation](http://admin.wechat.com/wiki) (Currently in Beta).
+or check this [official WeChat documentation](http://open.wechat.com/cgi-bin/newreadtemplate?t=overseas_open/docs/mini-programs/introduction/access-guide#introduction_access-guide) (Last Updated: 08/02/2017).
 
 ___
 
@@ -147,15 +147,15 @@ Here is a complete list of buttons to perform tasks when you are in development:
 **3.	Debug / Inspect:** see below.
 **4.	Project information:** see below.
 **5.	Compiler:** Can be usefull to compile the app when the auto-refresh of the view is not working.
-![compilator settings](assets/compilator-modal.png)  
+![compilator settings](assets/compilator-modal.png)
 
-**6.  Scene value**  
-**7.  Cache**    
-**8.  Shut down:**  Quit the project you are on and move toward another one.   
-**9.  Hide the simulator**  
-**10. Devices:** It gives a list of devices to test mini-program responsivness.  
-**11.  You can work on:** wifi, 4G, 3G, 2G.  
-**12.  Hide arborescence**  
+**6.  Scene value**
+**7.  Cache**
+**8.  Shut down:**  Quit the project you are on and move toward another one.
+**9.  Hide the simulator**
+**10. Devices:** It gives a list of devices to test mini-program responsivness.
+**11.  You can work on:** wifi, 4G, 3G, 2G.
+**12.  Hide arborescence**
 **13.  Manage your files:**  Search, add and delete a folder or a file.
 
 
@@ -165,13 +165,13 @@ This tool is an important part of the IDE, it looks like the good old *Chrome De
 ![IDE debugger](assets/debugger.png)
 
 
- **1. Top bar** 
-​      
-**Network:** This panel is to debug request and socket issues or page load performance.  
-**Storage:** allows to access all the data you have in your cache.  
-**AppData:** is used to display the current project data. You can directly edit the data in the panel and preview it.   
-**Wxml:** let you inspect and edit on the fly every elements of your page.  
-**Sensor:** you can simulate location and the performance of the mobile device to debug gravity sensing.  
+ **1. Top bar**
+​
+**Network:** This panel is to debug request and socket issues or page load performance.
+**Storage:** allows to access all the data you have in your cache.
+**AppData:** is used to display the current project data. You can directly edit the data in the panel and preview it.
+**Wxml:** let you inspect and edit on the fly every elements of your page.
+**Sensor:** you can simulate location and the performance of the mobile device to debug gravity sensing.
 
 
  **2. Sources panel**
@@ -437,22 +437,22 @@ ___
 ## The life cycle of your MP
 
 
-We can break-down a mini-program life cycle in two cycles, the application cycle and the page cycle. 
+We can break-down a mini-program life cycle in two cycles, the application cycle and the page cycle.
 The **`App()`** life cycle is the **start & end point** of the mini-program whereas **`Page()`** life cycle is activated when users browse through the mini-program.
 
 
 ### Application life cycle
 
-`App()` function is used to register a mini-program. It takes an object as parameter which specifies the life cycle functions of a MP.    
+`App()` function is used to register a mini-program. It takes an object as parameter which specifies the life cycle functions of a MP.
 
 ![App life cycle](assets/app-lifecylce.png)
 
 **Comments:**
 
 
-1. A user opens the mini-program which triggers **`onLaunch`** function and initialize the MP. 
-2. When the initialization is completed, the **`onShow`** function is triggered. 
-3. The **`onHide`** function is triggered when the current user exits the mini-program.   
+1. A user opens the mini-program which triggers **`onLaunch`** function and initialize the MP.
+2. When the initialization is completed, the **`onShow`** function is triggered.
+3. The **`onHide`** function is triggered when the current user exits the mini-program.
 
 
 
@@ -501,7 +501,7 @@ console.log(appInstance.globalData) // I am global data
 2. When a page loads, it calls the **`onShow`** function.
 3. The first time the page is displayed, **`onShow`** function calls **`onReady`** to render the view.
 4. On subsequent times, **`onShow`** function directly renders a view.
-5. The **`onHide`** is triggered when the mini-program jumps to another page. 
+5. The **`onHide`** is triggered when the mini-program jumps to another page.
 6. **`onUnload`** function is called when you quit a page by using `wx.redirectTo()`and  `wx.navigateBack()`. Or when the current page is relaunched, `wx.reLaunch`.
 
 **`Code snippet  of  "Page()" life cycle functions.`**
@@ -553,7 +553,7 @@ ___
 
 ## Core setup of your MP
 
-The setup of your mini-program is simple and designed to save you time and frustration when having customization needs.   
+The setup of your mini-program is simple and designed to save you time and frustration when having customization needs.
 
 
 WeChat divides the **app.json configuration** in five parts:
@@ -607,7 +607,7 @@ In this part we will **break-down** this complete **app.json setup** exemple.
 
 ### Routing
 
-`pages` role in **app.json** is to **define all routes**  of your mini-program. This item's configuration is **mandatory** and it **takes an array of strings**. Each sub-folder and files within the parent pages folder corresponds to a **routing path**.  
+`pages` role in **app.json** is to **define all routes**  of your mini-program. This item's configuration is **mandatory** and it **takes an array of strings**. Each sub-folder and files within the parent pages folder corresponds to a **routing path**.
 
 
 **`Code snippet  of  the "app.json" file. `**
@@ -622,8 +622,8 @@ In this part we will **break-down** this complete **app.json setup** exemple.
 }
 ```
 
-**Tip:**  
-Each time you **add a route path** to `"pages"`, the IDE will **automatically create** the folder and files that corresponds to the path you just created. 
+**Tip:**
+Each time you **add a route path** to `"pages"`, the IDE will **automatically create** the folder and files that corresponds to the path you just created.
 
 
 
@@ -822,7 +822,7 @@ The Mini-program framework does not allow developers to use the DOM to control y
  ![wxml and html differences](assets/data-binding.png)
 
 
-In order to comply with WeChat requirements the `data` attribute has to be initialized **in JSON format** within `Page()` function. **Data binding** technique allows to **update data dynamically** within the view layer.  
+In order to comply with WeChat requirements the `data` attribute has to be initialized **in JSON format** within `Page()` function. **Data binding** technique allows to **update data dynamically** within the view layer.
 
 
 A good practice is to initialize `data` at the top of the `Page()` function.
@@ -847,8 +847,8 @@ Page({
 
 The dynamic `data:` which is passed over to the view layer is taken from the data attributes in the corresponding `Page()` function.
 
-**Data binding syntax:**  
-Data binding uses [Mustache syntax](https://mustache.github.io/mustache.5.html) (double braces) to **wrap variables.** This syntax is a logic less template engine analysis. In short, it is very convenient and easy to use!  
+**Data binding syntax:**
+Data binding uses [Mustache syntax](https://mustache.github.io/mustache.5.html) (double braces) to **wrap variables.** This syntax is a logic less template engine analysis. In short, it is very convenient and easy to use!
 
 
 WeChat offers lot of possibilities regarding [data binding usage](https://mp.weixin.qq.com/debug/wxadoc/dev/framework/view/wxml/data.html ). You have the oportunity to use data binding on component attributes, properties, string operations, arithmetic operations, data path and array.
@@ -901,7 +901,7 @@ For more details on the code above see this [Github repository](https://github.c
 ### Conditional rendering: wx:if, wx:elif, wx:else
 
 
-Similar to `wx:for`, **`wx:if`** is used to define a conditional statement and determine whether the block should be rendered or not.  
+Similar to `wx:for`, **`wx:if`** is used to define a conditional statement and determine whether the block should be rendered or not.
 
 
 **`Code snippet "wx:if" example.`**
@@ -1085,7 +1085,7 @@ Page({
 The two common binding events used are `bind+event_type` and `catch+event_type`. The **catch event** is the one that prevent against bubbling events.
 
 
-**Bubbling event concept:**   
+**Bubbling event concept:**
 For non-javascript folks, **bubbling event** can be defined when an event occurs in **an element nested in another element.** Both the parent node and the nested elements are **registered as event handler** for that particular event.
 The parent node of the nested element should use `catch+event_type`, which will **prevent the event from bubbling to ancestor elements.**
 
