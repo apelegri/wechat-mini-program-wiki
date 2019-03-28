@@ -49,8 +49,9 @@ This original piece was written by Le Wagon alumni: [Adrien Pelegri (Batch #30)]
     - [Routing](#routing)
     - [TabBar](#tabbar)
     - [Window](#window)
-     - [Enable pull down refresh](#enble-pull-down-refresh)
-     - [Navbar, dynamic title](#navbar-dynamic-title)
+        - [Application orientation](#application-orientation)
+        - [Enable pull down refresh](#enable-pull-down-refresh)
+        - [Navbar, dynamic title](#navbar-dynamic-title)
     - [Network timeout](#network-timeout)
     - [Debug](#debug)
 - [Create dynamic pages](#create-dynamic-pages)
@@ -760,19 +761,19 @@ The application default orientation can be configured using `pageOrientation` in
 
 #### Enable pull down refresh
 
-`"enablePullDownRefresh": true` needs to be configured in the global **app.json** as above and then you can call `onPullDownRefresh() ` in mini-program pages.
+`"enablePullDownRefresh": true` needs to be configured in the global **app.json** as above and then you can call `onPullDownRefresh()` in mini-program pages.
 
  **`Code snippet  of the "Enable pull down refresh in a page" file.`**
 
 ```javascript
- // .js
- Page({
-   // Pull down the trigger event
+// .js
+Page({
+  // Pull down the trigger event
   onPullDownRefresh() {
     // Stop the dropdown refresh
     wx.stopPullDownRefresh()
   }
-}}
+})
 ```
 
 ####  Navbar dynamic title
