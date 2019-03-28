@@ -674,7 +674,7 @@ This function is used to **get the instance of the current page stack.** It is g
 
  **`Code snippet  of the "app.json" file.`**
 
-  ```javascript
+```javascript
 {
 "tabBar": {
     "backgroundColor": "#FFFFFE",
@@ -694,7 +694,7 @@ This function is used to **get the instance of the current page stack.** It is g
     }]
   }
 }
-  ```
+```
 
 **Attributes indication:**
 
@@ -715,7 +715,7 @@ Using the `tabBar` `list` key, requires an object in each element of the array.
 **WeChat recommendations:**
 
 - Setting your `tabBar` position to top could not display icons.
-- The limit size of your icons in the bottom `tabBar` are, 40kb, 81px*81px.
+- The limit size of your icons in the bottom `tabBar` are, 40kb, 81px\*81px.
 
 
 ### Window
@@ -723,20 +723,32 @@ The window item is used to set mini-program title and common window style.
 
 **`Code snippet  of the "app.json" file.`**
 
- ```javascript
+```javascript
 "window": {
    "navigationBarBackgroundColor": "#D03232",
    "navigationBarTextStyle": "white",
    "navigationBarTitleText": "Le Wagon",
    "backgroundColor": "#eeeeee",
    "backgroundTextStyle": "light",
-   "enablePullDownRefresh": true
+   "enablePullDownRefresh": true,
   }
- ```
+```
 
 **Window attributes description:**
 
- ![window configuration](assets/window-config.png)
+| Attribute | Type | Default value | Description |
+| --------- | ---- | ------------- | ----------- |
+| navigationBarBackgroundColor | HexColor | `#000000` | Navigation bar background color |
+| navigationBarTextStyle | String | `white` | Navigation bar title color, `black` or `white` |
+| navigationBarTitleText | String | | Navigation bar title |
+| navigationStyle | String | `default` | Navigation bar style, `default` or `custom`. Use `custom` to customize the navigation bar style. |
+| backgroundColor | HexColor | `#ffffff` | Application background color. Ex: background color you see on pull to refresh, does not affect the color of the `<page>` elements. |
+| backgroundTextStyle | String | `dark` | Pull to refresh text style, `dark` or `light` |
+| backgroundColorTop | String | `#ffffff` | Background color of the top part of the window. Only supported on iOS |
+| backgroundColorBottom | String | `#ffffff` | Background color of the bottom part of the window. Only supported on iOS |
+| enablePullDownRefresh | Boolean | `false` | Enable or disable pull to refresh app-wide. |
+| onReachBottomDistance | Number | `50` | Set the distance from the bottom of the page at which the `onReachBottom()` callback should be triggered. |
+| pageOrientation | String | `portrait` | Set screen rotation support. Supports `auto`, `portrait` and `landscape`. |
 
 
 #### Enable pull down refresh
