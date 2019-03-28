@@ -750,6 +750,13 @@ The window item is used to set mini-program title and common window style.
 | onReachBottomDistance | Number | `50` | Set the distance from the bottom of the page at which the `onReachBottom()` callback should be triggered. |
 | pageOrientation | String | `portrait` | Set screen rotation support. Supports `auto`, `portrait` and `landscape`. |
 
+#### Application orientation
+
+The application default orientation can be configured using `pageOrientation` in `window` in the `app.json` configuration file. This attributes supports 3 values:
+
+- Set to `auto` to allow the mini program to work in both Portrait and Landscape modes.
+- Set to `portrait` to force the mini program to display only in portrait mode
+- Set to `landscape` to force the mini program to display only in landscape mode
 
 #### Enable pull down refresh
 
